@@ -89,6 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     page.jumpToPage(0);
                   },
+                  icon: const Icon(Icons.info),
                 ),
                 SideMenuItem(
                   priority: 1,
@@ -96,6 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     page.jumpToPage(1);
                   },
+                  icon: const Icon(Icons.co_present_outlined),
                 ),
                 SideMenuItem(
                   priority: 2,
@@ -103,6 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     page.jumpToPage(2);
                   },
+                  icon: const Icon(Icons.group),
                 ),
                 SideMenuItem(
                   priority: 3,
