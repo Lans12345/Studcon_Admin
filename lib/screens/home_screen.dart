@@ -1,3 +1,6 @@
+import 'package:consultation_system/screens/pages/permission_page.dart';
+import 'package:consultation_system/screens/pages/roles_page.dart';
+import 'package:consultation_system/screens/pages/users_page.dart';
 import 'package:consultation_system/screens/tabs/analytics_tab.dart';
 import 'package:consultation_system/screens/tabs/dashboard_tab.dart';
 import 'package:consultation_system/screens/tabs/feedback_tab.dart';
@@ -9,6 +12,7 @@ import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../constant/colors.dart';
 import '../widgets/text_widget.dart';
@@ -146,6 +150,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: PageView(
               controller: page,
               children: [
+                PermissionPage(page: page),
+                RolesPage(page: page),
+                UsersPage(page: page),
                 ReportTab(
                   page: page,
                 ),
