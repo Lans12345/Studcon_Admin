@@ -85,33 +85,54 @@ class _HomeScreenState extends State<HomeScreen> {
               items: [
                 SideMenuItem(
                   priority: 0,
-                  title: 'Reports',
+                  title: 'Permission',
                   onTap: () {
                     page.jumpToPage(0);
+                  },
+                ),
+                SideMenuItem(
+                  priority: 1,
+                  title: 'Roles',
+                  onTap: () {
+                    page.jumpToPage(1);
+                  },
+                ),
+                SideMenuItem(
+                  priority: 2,
+                  title: 'Users',
+                  onTap: () {
+                    page.jumpToPage(2);
+                  },
+                ),
+                SideMenuItem(
+                  priority: 3,
+                  title: 'Reports',
+                  onTap: () {
+                    page.jumpToPage(3);
                   },
                   icon: const Icon(Icons.report_problem_rounded),
                 ),
                 SideMenuItem(
-                  priority: 1,
+                  priority: 4,
                   title: 'Analytics',
                   onTap: () {
-                    page.jumpToPage(1);
+                    page.jumpToPage(4);
                   },
                   icon: const Icon(Icons.analytics),
                 ),
                 SideMenuItem(
-                  priority: 2,
+                  priority: 5,
                   title: 'Feedback',
                   onTap: () {
-                    page.jumpToPage(2);
+                    page.jumpToPage(5);
                   },
                   icon: const Icon(Icons.feedback),
                 ),
                 SideMenuItem(
                   onTap: () {
-                    page.jumpToPage(3);
+                    page.jumpToPage(6);
                   },
-                  priority: 3,
+                  priority: 6,
                   title: 'Settings',
                   icon: const Icon(Icons.settings),
                 ),
