@@ -85,42 +85,33 @@ class _HomeScreenState extends State<HomeScreen> {
               items: [
                 SideMenuItem(
                   priority: 0,
-                  title: 'Dashboard',
-                  onTap: () {
-                    page.jumpToPage(0);
-                  },
-                  icon: const Icon(Icons.home),
-                  tooltipContent: "This is a tooltip for Dashboard item",
-                ),
-                SideMenuItem(
-                  priority: 1,
                   title: 'Reports',
                   onTap: () {
-                    page.jumpToPage(1);
+                    page.jumpToPage(0);
                   },
                   icon: const Icon(Icons.report_problem_rounded),
                 ),
                 SideMenuItem(
-                  priority: 2,
+                  priority: 1,
                   title: 'Analytics',
                   onTap: () {
-                    page.jumpToPage(2);
+                    page.jumpToPage(1);
                   },
                   icon: const Icon(Icons.analytics),
                 ),
                 SideMenuItem(
-                  priority: 3,
+                  priority: 2,
                   title: 'Feedback',
                   onTap: () {
-                    page.jumpToPage(3);
+                    page.jumpToPage(2);
                   },
                   icon: const Icon(Icons.feedback),
                 ),
                 SideMenuItem(
                   onTap: () {
-                    page.jumpToPage(4);
+                    page.jumpToPage(3);
                   },
-                  priority: 4,
+                  priority: 3,
                   title: 'Settings',
                   icon: const Icon(Icons.settings),
                 ),
@@ -131,9 +122,6 @@ class _HomeScreenState extends State<HomeScreen> {
             child: PageView(
               controller: page,
               children: [
-                DashboardTab(
-                  page: page,
-                ),
                 ReportTab(
                   page: page,
                 ),
