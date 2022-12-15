@@ -97,49 +97,41 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SideMenuItem(
                   priority: 1,
-                  title: 'Roles',
-                  onTap: () {
-                    page.jumpToPage(1);
-                  },
-                  icon: const Icon(Icons.co_present_outlined),
-                ),
-                SideMenuItem(
-                  priority: 2,
                   title: 'Users',
                   onTap: () {
-                    page.jumpToPage(2);
+                    page.jumpToPage(1);
                   },
                   icon: const Icon(Icons.group),
                 ),
                 SideMenuItem(
-                  priority: 3,
+                  priority: 2,
                   title: 'Reports',
                   onTap: () {
-                    page.jumpToPage(3);
+                    page.jumpToPage(2);
                   },
                   icon: const Icon(Icons.report_problem_rounded),
                 ),
                 SideMenuItem(
-                  priority: 4,
+                  priority: 3,
                   title: 'Analytics',
                   onTap: () {
-                    page.jumpToPage(4);
+                    page.jumpToPage(3);
                   },
                   icon: const Icon(Icons.analytics),
                 ),
                 SideMenuItem(
-                  priority: 5,
+                  priority: 4,
                   title: 'Feedback',
                   onTap: () {
-                    page.jumpToPage(5);
+                    page.jumpToPage(4);
                   },
                   icon: const Icon(Icons.feedback),
                 ),
                 SideMenuItem(
                   onTap: () {
-                    page.jumpToPage(6);
+                    page.jumpToPage(5);
                   },
-                  priority: 6,
+                  priority: 5,
                   title: 'Settings',
                   icon: const Icon(Icons.settings),
                 ),
@@ -151,7 +143,6 @@ class _HomeScreenState extends State<HomeScreen> {
               controller: page,
               children: [
                 PermissionPage(page: page),
-                RolesPage(page: page),
                 UsersPage(page: page),
                 ReportTab(
                   page: page,
