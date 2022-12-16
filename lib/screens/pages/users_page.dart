@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consultation_system/constant/colors.dart';
 import 'package:consultation_system/repositories/auth_repository.dart';
+import 'package:consultation_system/repositories/user_repository.dart';
 import 'package:consultation_system/services/add_user.dart';
 import 'package:consultation_system/services/navigation.dart';
 import 'package:consultation_system/widgets/drop_down_button.dart';
@@ -245,252 +246,517 @@ class _ReportTabState extends State<UsersPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 50),
-                  child: MaterialButton(
-                      height: 40,
-                      minWidth: 120,
-                      color: Colors.green,
-                      child: NormalText(
-                          label: 'Add User', fontSize: 12, color: Colors.white),
-                      onPressed: (() {
-                        showDialog(
-                            context: context,
-                            builder: ((context) {
-                              return Dialog(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      right: 0, bottom: 0),
-                                  child: Container(
-                                    height: 550,
-                                    width: 400,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.grey[100]),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 0),
+                      child: MaterialButton(
+                          height: 40,
+                          minWidth: 120,
+                          color: Colors.green,
+                          child: NormalText(
+                              label: 'Add Student',
+                              fontSize: 12,
+                              color: Colors.white),
+                          onPressed: (() {
+                            showDialog(
+                                context: context,
+                                builder: ((context) {
+                                  return Dialog(
                                     child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          30, 10, 30, 10),
-                                      child: SingleChildScrollView(
-                                        child: Form(
-                                          key: signupformKey,
-                                          child: Center(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
+                                      padding: const EdgeInsets.only(
+                                          right: 0, bottom: 0),
+                                      child: Container(
+                                        height: 550,
+                                        width: 400,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color: Colors.grey[100]),
+                                        child: Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              30, 10, 30, 10),
+                                          child: SingleChildScrollView(
+                                            child: Form(
+                                              key: signupformKey,
+                                              child: Center(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
-                                                    BoldText(
-                                                        label: 'Registration',
-                                                        fontSize: 18,
-                                                        color: primary),
-                                                    IconButton(
-                                                        onPressed: (() {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        }),
-                                                        icon: Icon(
-                                                          Icons.close,
-                                                          color: Colors.red,
-                                                        ))
-                                                  ],
-                                                ),
-                                                NormalText(
-                                                    label:
-                                                        'Create student account',
-                                                    fontSize: 14,
-                                                    color: Colors.black),
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                TextformfieldWidget(
-                                                  label: 'First name',
-                                                  textFieldController:
-                                                      _firstNameController,
-                                                ),
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                TextformfieldWidget(
-                                                  label: 'Middle Name',
-                                                  textFieldController:
-                                                      _middleNameController,
-                                                ),
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                TextformfieldWidget(
-                                                  label: 'Surname',
-                                                  textFieldController:
-                                                      _surNameController,
-                                                ),
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                TextformfieldWidget(
-                                                  label: 'Contact Number',
-                                                  textFieldController:
-                                                      _contactNumberController,
-                                                ),
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                TextformfieldWidget(
-                                                  label: 'Address',
-                                                  textFieldController:
-                                                      addressController,
-                                                ),
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                TextformfieldWidget(
-                                                  label: 'Course',
-                                                  textFieldController:
-                                                      courseController,
-                                                ),
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                TextformfieldWidget(
-                                                  label: 'Year Level',
-                                                  textFieldController:
-                                                      yearController,
-                                                ),
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                TextformfieldWidget(
-                                                    prefixIcon:
-                                                        const Icon(Icons.email),
-                                                    label: 'Email',
-                                                    textFieldController:
-                                                        _emailController),
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                TextformfieldWidget(
-                                                    prefixIcon:
-                                                        const Icon(Icons.lock),
-                                                    label: 'Password',
-                                                    textFieldController:
-                                                        _passwordController),
-                                                const SizedBox(
-                                                  height: 50,
-                                                ),
-                                                Center(
-                                                  child: MaterialButton(
-                                                      minWidth: 300,
-                                                      color: primary,
-                                                      shape:
-                                                          RoundedRectangleBorder(
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        BoldText(
+                                                            label:
+                                                                'Registration',
+                                                            fontSize: 18,
+                                                            color: primary),
+                                                        IconButton(
+                                                            onPressed: (() {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            }),
+                                                            icon: Icon(
+                                                              Icons.close,
+                                                              color: Colors.red,
+                                                            ))
+                                                      ],
+                                                    ),
+                                                    NormalText(
+                                                        label:
+                                                            'Create student account',
+                                                        fontSize: 14,
+                                                        color: Colors.black),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                      label: 'First name',
+                                                      textFieldController:
+                                                          _firstNameController,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                      label: 'Middle Name',
+                                                      textFieldController:
+                                                          _middleNameController,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                      label: 'Surname',
+                                                      textFieldController:
+                                                          _surNameController,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                      label: 'Contact Number',
+                                                      textFieldController:
+                                                          _contactNumberController,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                      label: 'Address',
+                                                      textFieldController:
+                                                          addressController,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                      label: 'Course',
+                                                      textFieldController:
+                                                          courseController,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                      label: 'Year Level',
+                                                      textFieldController:
+                                                          yearController,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                        prefixIcon: const Icon(
+                                                            Icons.email),
+                                                        label: 'Email',
+                                                        textFieldController:
+                                                            _emailController),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                        prefixIcon: const Icon(
+                                                            Icons.lock),
+                                                        label: 'Password',
+                                                        textFieldController:
+                                                            _passwordController),
+                                                    const SizedBox(
+                                                      height: 50,
+                                                    ),
+                                                    Center(
+                                                      child: MaterialButton(
+                                                          minWidth: 300,
+                                                          color: primary,
+                                                          shape: RoundedRectangleBorder(
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
                                                                           100)),
-                                                      onPressed: (() async {
-                                                        if (signupformKey
-                                                                .currentState!
-                                                                .validate() &&
-                                                            _emailController
-                                                                .text
-                                                                .contains(
-                                                                    'student.buksu.edu.ph')) {
-                                                          // AuthRepository().userSignUp(
-                                                          //     _firstNameController
-                                                          //         .text,
-                                                          //     _middleNameController
-                                                          //         .text,
-                                                          //     _surNameController
-                                                          //         .text,
-                                                          //     _contactNumberController
-                                                          //         .text,
-                                                          //     _emailController
-                                                          //         .text,
-                                                          //     _passwordController
-                                                          //         .text,
-                                                          //     '',
-                                                          //     course);
+                                                          onPressed: (() async {
+                                                            if (signupformKey
+                                                                    .currentState!
+                                                                    .validate() &&
+                                                                _emailController
+                                                                    .text
+                                                                    .contains(
+                                                                        'student.buksu.edu.ph')) {
+                                                              // AuthRepository().userSignUp(
+                                                              //     _firstNameController
+                                                              //         .text,
+                                                              //     _middleNameController
+                                                              //         .text,
+                                                              //     _surNameController
+                                                              //         .text,
+                                                              //     _contactNumberController
+                                                              //         .text,
+                                                              //     _emailController
+                                                              //         .text,
+                                                              //     _passwordController
+                                                              //         .text,
+                                                              //     '',
+                                                              //     course);
 
-                                                          await FirebaseAuth
-                                                              .instance
-                                                              .createUserWithEmailAndPassword(
-                                                                  email:
-                                                                      _emailController
+                                                              await FirebaseAuth
+                                                                  .instance
+                                                                  .createUserWithEmailAndPassword(
+                                                                      email: _emailController
                                                                           .text
                                                                           .trim(),
-                                                                  password:
-                                                                      _passwordController
+                                                                      password: _passwordController
                                                                           .text
                                                                           .trim())
-                                                              .then(
-                                                                  (value) async {
-                                                            await addUser(
-                                                                '${_firstNameController.text} ${_surNameController.text}',
-                                                                _contactNumberController
-                                                                    .text,
-                                                                addressController
-                                                                    .text,
-                                                                courseController
-                                                                    .text,
-                                                                yearController
-                                                                    .text,
-                                                                _emailController
-                                                                    .text,
-                                                                value
-                                                                    .user!.uid);
-                                                          });
+                                                                  .then(
+                                                                      (value) async {
+                                                                await addUser(
+                                                                    '${_firstNameController.text} ${_surNameController.text}',
+                                                                    _contactNumberController
+                                                                        .text,
+                                                                    addressController
+                                                                        .text,
+                                                                    courseController
+                                                                        .text,
+                                                                    yearController
+                                                                        .text,
+                                                                    _emailController
+                                                                        .text,
+                                                                    value.user!
+                                                                        .uid);
+                                                              });
 
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                            const SnackBar(
-                                                              duration:
-                                                                  Duration(
-                                                                      seconds:
-                                                                          5),
-                                                              content: Text(
-                                                                  'Student Registered Succesfully!'),
-                                                            ),
-                                                          );
-                                                        }
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                              _firstNameController
+                                                                  .clear();
+                                                              _middleNameController
+                                                                  .clear();
+                                                              _surNameController
+                                                                  .clear();
+                                                              addressController
+                                                                  .clear();
+                                                              _contactNumberController
+                                                                  .clear();
+                                                              _emailController
+                                                                  .clear();
+                                                              _passwordController
+                                                                  .clear();
+                                                              courseController
+                                                                  .clear();
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                const SnackBar(
+                                                                  duration:
+                                                                      Duration(
+                                                                          seconds:
+                                                                              5),
+                                                                  content: Text(
+                                                                      'Student Registered Succesfully!'),
+                                                                ),
+                                                              );
+                                                            }
 
-                                                        // Navigator.of(context).push(MaterialPageRoute(
-                                                        //     builder: (context) => LoginPage()));
-                                                      }),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: NormalText(
-                                                            label:
-                                                                'Register Student',
-                                                            fontSize: 24,
-                                                            color:
-                                                                Colors.white),
-                                                      )),
+                                                            // Navigator.of(context).push(MaterialPageRoute(
+                                                            //     builder: (context) => LoginPage()));
+                                                          }),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
+                                                            child: NormalText(
+                                                                label:
+                                                                    'Register Student',
+                                                                fontSize: 24,
+                                                                color: Colors
+                                                                    .white),
+                                                          )),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 30,
+                                                    ),
+                                                  ],
                                                 ),
-                                                const SizedBox(
-                                                  height: 30,
-                                                ),
-                                              ],
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                              );
-                            }));
-                      })),
+                                  );
+                                }));
+                          })),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 50),
+                      child: MaterialButton(
+                          height: 40,
+                          minWidth: 120,
+                          color: Colors.green,
+                          child: NormalText(
+                              label: 'Add Instructor',
+                              fontSize: 12,
+                              color: Colors.white),
+                          onPressed: (() {
+                            showDialog(
+                                context: context,
+                                builder: ((context) {
+                                  return Dialog(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 0, bottom: 0),
+                                      child: Container(
+                                        height: 550,
+                                        width: 400,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color: Colors.grey[100]),
+                                        child: Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              30, 10, 30, 10),
+                                          child: SingleChildScrollView(
+                                            child: Form(
+                                              key: signupformKey,
+                                              child: Center(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        BoldText(
+                                                            label:
+                                                                'Registration',
+                                                            fontSize: 18,
+                                                            color: primary),
+                                                        IconButton(
+                                                            onPressed: (() {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            }),
+                                                            icon: Icon(
+                                                              Icons.close,
+                                                              color: Colors.red,
+                                                            ))
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    NormalText(
+                                                        label:
+                                                            'Create instructor account',
+                                                        fontSize: 14,
+                                                        color: Colors.black),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                      label: 'First name',
+                                                      textFieldController:
+                                                          _firstNameController,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                      label: 'Middle Name',
+                                                      textFieldController:
+                                                          _middleNameController,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                      label: 'Surname',
+                                                      textFieldController:
+                                                          _surNameController,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                      label: 'Contact Number',
+                                                      textFieldController:
+                                                          _contactNumberController,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                      label: 'Department',
+                                                      textFieldController:
+                                                          courseController,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                        prefixIcon: const Icon(
+                                                            Icons.email),
+                                                        label: 'Email',
+                                                        textFieldController:
+                                                            _emailController),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextformfieldWidget(
+                                                        prefixIcon: const Icon(
+                                                            Icons.lock),
+                                                        label: 'Password',
+                                                        textFieldController:
+                                                            _passwordController),
+                                                    const SizedBox(
+                                                      height: 50,
+                                                    ),
+                                                    Center(
+                                                      child: MaterialButton(
+                                                          minWidth: 300,
+                                                          color: primary,
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          100)),
+                                                          onPressed: (() async {
+                                                            if (signupformKey
+                                                                    .currentState!
+                                                                    .validate() &&
+                                                                _emailController
+                                                                    .text
+                                                                    .contains(
+                                                                        'buksu.edu.ph')) {
+                                                              await FirebaseAuth
+                                                                  .instance
+                                                                  .createUserWithEmailAndPassword(
+                                                                      email: _emailController
+                                                                          .text
+                                                                          .trim(),
+                                                                      password: _passwordController
+                                                                          .text
+                                                                          .trim())
+                                                                  .then(
+                                                                      (value) async {
+                                                                UserRepository().addUser(
+                                                                    _firstNameController
+                                                                        .text,
+                                                                    _middleNameController
+                                                                        .text,
+                                                                    _surNameController
+                                                                        .text,
+                                                                    _contactNumberController
+                                                                        .text,
+                                                                    _emailController
+                                                                        .text,
+                                                                    _passwordController
+                                                                        .text,
+                                                                    value.user!
+                                                                        .uid,
+                                                                    courseController
+                                                                        .text);
+                                                              });
+
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                              _firstNameController
+                                                                  .clear();
+                                                              _middleNameController
+                                                                  .clear();
+                                                              _surNameController
+                                                                  .clear();
+                                                              _contactNumberController
+                                                                  .clear();
+                                                              _emailController
+                                                                  .clear();
+                                                              _passwordController
+                                                                  .clear();
+                                                              courseController
+                                                                  .clear();
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                const SnackBar(
+                                                                  duration:
+                                                                      Duration(
+                                                                          seconds:
+                                                                              5),
+                                                                  content: Text(
+                                                                      'Instructor Registered Succesfully!'),
+                                                                ),
+                                                              );
+
+                                                              // Navigator.of(context).push(MaterialPageRoute(
+                                                              //     builder: (context) => LoginPage()));
+                                                            }
+                                                          }),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
+                                                            child: NormalText(
+                                                                label:
+                                                                    'Register Instructor',
+                                                                fontSize: 24,
+                                                                color: Colors
+                                                                    .white),
+                                                          )),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 30,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }));
+                          })),
+                    ),
+                  ],
                 ),
                 Row(
                   children: [
