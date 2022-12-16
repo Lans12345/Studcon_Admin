@@ -869,7 +869,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                                         color: Colors.blue,
                                                                                         child: NormalText(label: 'Automotive', fontSize: 12, color: Colors.white),
                                                                                         onPressed: (() {
-                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[index].id).update({
+                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                             'course': 'Automotive',
                                                                                           });
                                                                                           Navigator.of(context).pop();
@@ -878,7 +878,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                                         color: Colors.blue,
                                                                                         child: NormalText(label: 'Food Technology', fontSize: 12, color: Colors.white),
                                                                                         onPressed: (() {
-                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[index].id).update({
+                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                             'course': 'Food Technology',
                                                                                           });
                                                                                           Navigator.of(context).pop();
@@ -898,7 +898,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                                         color: Colors.blue,
                                                                                         child: NormalText(label: 'Electronic Technology', fontSize: 12, color: Colors.white),
                                                                                         onPressed: (() {
-                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[index].id).update({
+                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                             'course': 'Electronic Technology',
                                                                                           });
                                                                                           Navigator.of(context).pop();
@@ -907,7 +907,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                                         color: Colors.blue,
                                                                                         child: NormalText(label: 'Entertainment and Multimedia Computing', fontSize: 12, color: Colors.white),
                                                                                         onPressed: (() {
-                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[index].id).update({
+                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                             'course': 'Entertainment and Multimedia Computing',
                                                                                           });
                                                                                           Navigator.of(context).pop();
@@ -922,7 +922,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                                   color: Colors.blue,
                                                                                   child: NormalText(label: 'Information Technology', fontSize: 12, color: Colors.white),
                                                                                   onPressed: (() {
-                                                                                    FirebaseFirestore.instance.collection('Users').doc(data.docs[index].id).update({
+                                                                                    FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                       'course': 'Information Technology',
                                                                                     });
                                                                                     Navigator.of(context).pop();
@@ -995,7 +995,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                                         color: Colors.blue,
                                                                                         child: NormalText(label: 'First Year', fontSize: 12, color: Colors.white),
                                                                                         onPressed: (() {
-                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[index].id).update({
+                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                             'yearLevel': 'First Year',
                                                                                           });
                                                                                           Navigator.of(context).pop();
@@ -1004,7 +1004,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                                         color: Colors.blue,
                                                                                         child: NormalText(label: 'Second Year', fontSize: 12, color: Colors.white),
                                                                                         onPressed: (() {
-                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[index].id).update({
+                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                             'yearLevel': 'Second Year',
                                                                                           });
                                                                                           Navigator.of(context).pop();
@@ -1024,7 +1024,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                                         color: Colors.blue,
                                                                                         child: NormalText(label: 'Third Year', fontSize: 12, color: Colors.white),
                                                                                         onPressed: (() {
-                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[index].id).update({
+                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                             'yearLevel': 'Third Year',
                                                                                           });
                                                                                           Navigator.of(context).pop();
@@ -1033,7 +1033,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                                         color: Colors.blue,
                                                                                         child: NormalText(label: 'Fourth Year', fontSize: 12, color: Colors.white),
                                                                                         onPressed: (() {
-                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[index].id).update({
+                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                             'yearLevel': 'Fourth Year',
                                                                                           });
                                                                                           Navigator.of(context).pop();
@@ -1092,8 +1092,7 @@ class _ReportTabState extends State<UsersPage> {
                                                               .collection(
                                                                   'Users')
                                                               .doc(data
-                                                                  .docs[index]
-                                                                  .id)
+                                                                  .docs[i].id)
                                                               .update({
                                                             'status': 'Deleted',
                                                           });
