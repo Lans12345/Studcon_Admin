@@ -135,6 +135,52 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: 'Settings',
                   icon: const Icon(Icons.settings),
                 ),
+                SideMenuItem(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: ((context) {
+                          return Dialog(
+                            child: SizedBox(
+                              height: 400,
+                              width: 400,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 20),
+                                      child: Align(
+                                        alignment: Alignment.topRight,
+                                        child: MaterialButton(
+                                            child: NormalText(
+                                                label: 'Add Category',
+                                                fontSize: 12,
+                                                color: Colors.white),
+                                            color: Colors.green,
+                                            onPressed: (() {})),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: SizedBox(
+                                        child: ListView.builder(
+                                            itemBuilder: ((context, index) {
+                                          return ListTile();
+                                        })),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        }));
+                  },
+                  priority: 6,
+                  title: 'Categories',
+                  icon: const Icon(Icons.category_outlined),
+                ),
               ],
             ),
           ),
