@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consultation_system/screens/pages/permission_page.dart';
 import 'package:consultation_system/screens/pages/roles_page.dart';
 import 'package:consultation_system/screens/pages/users_page.dart';
@@ -8,6 +9,8 @@ import 'package:consultation_system/screens/tabs/messages_tab.dart';
 import 'package:consultation_system/screens/tabs/notif_tab.dart';
 import 'package:consultation_system/screens/tabs/reports_tab.dart';
 import 'package:consultation_system/screens/tabs/settings_tab.dart';
+import 'package:consultation_system/services/add_categ.dart';
+import 'package:consultation_system/widgets/textform_field_widget.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +31,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   PageController page = PageController();
+
+  final categController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -159,17 +164,145 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 fontSize: 12,
                                                 color: Colors.white),
                                             color: Colors.green,
-                                            onPressed: (() {})),
+                                            onPressed: (() {
+                                              Navigator.pop(context);
+                                              showDialog(
+                                                  context: context,
+                                                  builder: ((context) {
+                                                    return Dialog(
+                                                      child: SizedBox(
+                                                        height: 250,
+                                                        width: 300,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .fromLTRB(
+                                                                  10,
+                                                                  10,
+                                                                  10,
+                                                                  10),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              NormalText(
+                                                                  label:
+                                                                      'Name of Category',
+                                                                  fontSize: 14,
+                                                                  color: Colors
+                                                                      .black),
+                                                              SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              TextformfieldWidget(
+                                                                  textFieldController:
+                                                                      categController,
+                                                                  label: ''),
+                                                              SizedBox(
+                                                                height: 20,
+                                                              ),
+                                                              Align(
+                                                                alignment: Alignment
+                                                                    .bottomRight,
+                                                                child:
+                                                                    MaterialButton(
+                                                                        color: Colors
+                                                                            .green,
+                                                                        child: NormalText(
+                                                                            label:
+                                                                                'Continue',
+                                                                            fontSize:
+                                                                                12,
+                                                                            color: Colors
+                                                                                .white),
+                                                                        onPressed:
+                                                                            (() {
+                                                                          Navigator.of(context)
+                                                                              .pop();
+                                                                          addCateg(
+                                                                              categController.text);
+
+                                                                          categController
+                                                                              .clear();
+                                                                        })),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }));
+                                            })),
                                       ),
                                     ),
-                                    Expanded(
-                                      child: SizedBox(
-                                        child: ListView.builder(
-                                            itemBuilder: ((context, index) {
-                                          return ListTile();
-                                        })),
-                                      ),
-                                    ),
+                                    StreamBuilder<QuerySnapshot>(
+                                        stream: FirebaseFirestore.instance
+                                            .collection('Categ')
+                                            .snapshots(),
+                                        builder: (BuildContext context,
+                                            AsyncSnapshot<QuerySnapshot>
+                                                snapshot) {
+                                          if (snapshot.hasError) {
+                                            print(snapshot.error);
+                                            return const Center(
+                                                child: Text('Error'));
+                                          }
+                                          if (snapshot.connectionState ==
+                                              ConnectionState.waiting) {
+                                            print('waiting');
+                                            return const Padding(
+                                              padding: EdgeInsets.only(top: 50),
+                                              child: Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                color: Colors.black,
+                                              )),
+                                            );
+                                          }
+
+                                          final data = snapshot.requireData;
+                                          return Expanded(
+                                            child: SizedBox(
+                                              child: ListView.builder(
+                                                  itemCount:
+                                                      snapshot.data?.size ?? 0,
+                                                  itemBuilder:
+                                                      ((context, index) {
+                                                    return ListTile(
+                                                      tileColor: Colors.white,
+                                                      title: NormalText(
+                                                          label:
+                                                              data.docs[index]
+                                                                  ['name'],
+                                                          fontSize: 12,
+                                                          color: Colors.black),
+                                                      trailing: IconButton(
+                                                        onPressed: (() {
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  'Categ')
+                                                              .doc(data
+                                                                  .docs[index]
+                                                                  .id)
+                                                              .delete();
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        }),
+                                                        icon: Icon(
+                                                          Icons.delete,
+                                                          color: Colors.red,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  })),
+                                            ),
+                                          );
+                                        }),
                                   ],
                                 ),
                               ),
