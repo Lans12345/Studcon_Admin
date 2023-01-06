@@ -451,7 +451,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                           .trim())
                                                                   .then(
                                                                       (value) async {
-                                                                await addUser(
+                                                                addUser(
                                                                     '${_firstNameController.text} ${_surNameController.text}',
                                                                     _contactNumberController
                                                                         .text,
