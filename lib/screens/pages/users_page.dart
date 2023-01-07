@@ -270,10 +270,6 @@ class _ReportTabState extends State<UsersPage> {
                           height: 40,
                           minWidth: 120,
                           color: Colors.green,
-                          child: NormalText(
-                              label: 'Add Student',
-                              fontSize: 12,
-                              color: Colors.white),
                           onPressed: (() {
                             showDialog(
                                 context: context,
@@ -319,7 +315,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                       context)
                                                                   .pop();
                                                             }),
-                                                            icon: Icon(
+                                                            icon: const Icon(
                                                               Icons.close,
                                                               color: Colors.red,
                                                             ))
@@ -390,6 +386,7 @@ class _ReportTabState extends State<UsersPage> {
                                                       height: 20,
                                                     ),
                                                     TextformfieldWidget(
+                                                        isForStudentReg: true,
                                                         prefixIcon: const Icon(
                                                             Icons.email),
                                                         label: 'Email',
@@ -528,9 +525,13 @@ class _ReportTabState extends State<UsersPage> {
                                     ),
                                   );
                                 }));
-                          })),
+                          }),
+                          child: NormalText(
+                              label: 'Add Student',
+                              fontSize: 12,
+                              color: Colors.white)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     Padding(
@@ -539,10 +540,6 @@ class _ReportTabState extends State<UsersPage> {
                           height: 40,
                           minWidth: 120,
                           color: Colors.green,
-                          child: NormalText(
-                              label: 'Add Instructor',
-                              fontSize: 12,
-                              color: Colors.white),
                           onPressed: (() {
                             showDialog(
                                 context: context,
@@ -588,7 +585,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                       context)
                                                                   .pop();
                                                             }),
-                                                            icon: Icon(
+                                                            icon: const Icon(
                                                               Icons.close,
                                                               color: Colors.red,
                                                             ))
@@ -646,6 +643,7 @@ class _ReportTabState extends State<UsersPage> {
                                                       height: 20,
                                                     ),
                                                     TextformfieldWidget(
+                                                        isForStudentReg: false,
                                                         prefixIcon: const Icon(
                                                             Icons.email),
                                                         label: 'Email',
@@ -769,7 +767,11 @@ class _ReportTabState extends State<UsersPage> {
                                     ),
                                   );
                                 }));
-                          })),
+                          }),
+                          child: NormalText(
+                              label: 'Add Instructor',
+                              fontSize: 12,
+                              color: Colors.white)),
                     ),
                   ],
                 ),
@@ -795,7 +797,7 @@ class _ReportTabState extends State<UsersPage> {
                             underline: Container(color: Colors.transparent),
                             iconEnabledColor: Colors.black,
                             isExpanded: true,
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                             value: _dropdownValue,
                             items: [
                               DropdownMenuItem(
@@ -1087,12 +1089,6 @@ class _ReportTabState extends State<UsersPage> {
                                                           MaterialButton(
                                                               color:
                                                                   Colors.blue,
-                                                              child: NormalText(
-                                                                  label:
-                                                                      'Update',
-                                                                  fontSize: 12,
-                                                                  color: Colors
-                                                                      .white),
                                                               onPressed: (() {
                                                                 showDialog(
                                                                     context:
@@ -1119,27 +1115,27 @@ class _ReportTabState extends State<UsersPage> {
                                                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                                                 children: [
                                                                                   NormalText(label: 'New Department', fontSize: 12, color: Colors.black),
-                                                                                  SizedBox(
+                                                                                  const SizedBox(
                                                                                     height: 10,
                                                                                   ),
                                                                                   TextformfieldWidget(
                                                                                     label: 'Enter Department',
                                                                                     textFieldController: newDep,
                                                                                   ),
-                                                                                  SizedBox(
+                                                                                  const SizedBox(
                                                                                     height: 20,
                                                                                   ),
                                                                                   Align(
                                                                                     alignment: Alignment.bottomRight,
                                                                                     child: MaterialButton(
                                                                                         color: Colors.blue,
-                                                                                        child: NormalText(label: 'Update', fontSize: 12, color: Colors.white),
                                                                                         onPressed: (() {
                                                                                           FirebaseFirestore.instance.collection('CONSULTATION-USERS').doc(data.docs[i].id).update({
                                                                                             'department': newDep.text,
                                                                                           });
                                                                                           Navigator.pop(context);
-                                                                                        })),
+                                                                                        }),
+                                                                                        child: NormalText(label: 'Update', fontSize: 12, color: Colors.white)),
                                                                                   )
                                                                                 ],
                                                                               ),
@@ -1159,21 +1155,22 @@ class _ReportTabState extends State<UsersPage> {
                                                                 //   'status':
                                                                 //       'Inactive',
                                                                 // });
-                                                              })),
+                                                              }),
+                                                              child: NormalText(
+                                                                  label:
+                                                                      'Update',
+                                                                  fontSize: 12,
+                                                                  color: Colors
+                                                                      .white)),
 
-                                                          SizedBox(
+                                                          const SizedBox(
                                                             width: 20,
                                                           ),
                                                           MaterialButton(
                                                               color: Colors.red,
-                                                              child: NormalText(
-                                                                  label:
-                                                                      'Delete',
-                                                                  fontSize: 12,
-                                                                  color: Colors
-                                                                      .white),
-                                                              onPressed: (() {
-                                                                FirebaseFirestore
+                                                              onPressed:
+                                                                  (() async {
+                                                                await FirebaseFirestore
                                                                     .instance
                                                                     .collection(
                                                                         'CONSULTATION-USERS')
@@ -1184,7 +1181,13 @@ class _ReportTabState extends State<UsersPage> {
                                                                   'status':
                                                                       'Inactive',
                                                                 });
-                                                              }))
+                                                              }),
+                                                              child: NormalText(
+                                                                  label:
+                                                                      'Delete',
+                                                                  fontSize: 12,
+                                                                  color: Colors
+                                                                      .white))
                                                         ],
                                                       ),
                                                     ),
@@ -1284,7 +1287,7 @@ class _ReportTabState extends State<UsersPage> {
                                                           PopupMenuButton(
                                                             tooltip:
                                                                 'Update User Info',
-                                                            icon: Icon(
+                                                            icon: const Icon(
                                                               Icons
                                                                   .person_add_alt_outlined,
                                                               color:
@@ -1331,7 +1334,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                                                   children: [
                                                                                     NormalText(label: 'Choose Course', fontSize: 14, color: Colors.black),
-                                                                                    SizedBox(
+                                                                                    const SizedBox(
                                                                                       height: 20,
                                                                                     ),
                                                                                     SizedBox(
@@ -1341,26 +1344,26 @@ class _ReportTabState extends State<UsersPage> {
                                                                                         children: [
                                                                                           MaterialButton(
                                                                                               color: Colors.blue,
-                                                                                              child: NormalText(label: 'Automotive', fontSize: 12, color: Colors.white),
                                                                                               onPressed: (() {
                                                                                                 FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                                   'course': 'Automotive',
                                                                                                 });
                                                                                                 Navigator.of(context).pop();
-                                                                                              })),
+                                                                                              }),
+                                                                                              child: NormalText(label: 'Automotive', fontSize: 12, color: Colors.white)),
                                                                                           MaterialButton(
                                                                                               color: Colors.blue,
-                                                                                              child: NormalText(label: 'Food Technology', fontSize: 12, color: Colors.white),
                                                                                               onPressed: (() {
                                                                                                 FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                                   'course': 'Food Technology',
                                                                                                 });
                                                                                                 Navigator.of(context).pop();
-                                                                                              })),
+                                                                                              }),
+                                                                                              child: NormalText(label: 'Food Technology', fontSize: 12, color: Colors.white)),
                                                                                         ],
                                                                                       ),
                                                                                     ),
-                                                                                    SizedBox(
+                                                                                    const SizedBox(
                                                                                       height: 10,
                                                                                     ),
                                                                                     SizedBox(
@@ -1370,37 +1373,37 @@ class _ReportTabState extends State<UsersPage> {
                                                                                         children: [
                                                                                           MaterialButton(
                                                                                               color: Colors.blue,
-                                                                                              child: NormalText(label: 'Electronic Technology', fontSize: 12, color: Colors.white),
                                                                                               onPressed: (() {
                                                                                                 FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                                   'course': 'Electronic Technology',
                                                                                                 });
                                                                                                 Navigator.of(context).pop();
-                                                                                              })),
+                                                                                              }),
+                                                                                              child: NormalText(label: 'Electronic Technology', fontSize: 12, color: Colors.white)),
                                                                                           MaterialButton(
                                                                                               color: Colors.blue,
-                                                                                              child: NormalText(label: 'Entertainment and Multimedia Computing', fontSize: 12, color: Colors.white),
                                                                                               onPressed: (() {
                                                                                                 FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                                   'course': 'Entertainment and Multimedia Computing',
                                                                                                 });
                                                                                                 Navigator.of(context).pop();
-                                                                                              })),
+                                                                                              }),
+                                                                                              child: NormalText(label: 'Entertainment and Multimedia Computing', fontSize: 12, color: Colors.white)),
                                                                                         ],
                                                                                       ),
                                                                                     ),
-                                                                                    SizedBox(
+                                                                                    const SizedBox(
                                                                                       height: 10,
                                                                                     ),
                                                                                     MaterialButton(
                                                                                         color: Colors.blue,
-                                                                                        child: NormalText(label: 'Information Technology', fontSize: 12, color: Colors.white),
                                                                                         onPressed: (() {
                                                                                           FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                             'course': 'Information Technology',
                                                                                           });
                                                                                           Navigator.of(context).pop();
-                                                                                        })),
+                                                                                        }),
+                                                                                        child: NormalText(label: 'Information Technology', fontSize: 12, color: Colors.white)),
                                                                                   ],
                                                                                 ),
                                                                               ),
@@ -1412,7 +1415,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                             context,
                                                                         builder:
                                                                             ((context) {
-                                                                          return Dialog(
+                                                                          return const Dialog(
                                                                             child:
                                                                                 SizedBox(
                                                                               height: 400,
@@ -1450,7 +1453,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                                                   children: [
                                                                                     NormalText(label: 'Edit Year Level', fontSize: 12, color: Colors.black),
-                                                                                    SizedBox(
+                                                                                    const SizedBox(
                                                                                       height: 20,
                                                                                     ),
                                                                                     SizedBox(
@@ -1460,26 +1463,26 @@ class _ReportTabState extends State<UsersPage> {
                                                                                         children: [
                                                                                           MaterialButton(
                                                                                               color: Colors.blue,
-                                                                                              child: NormalText(label: 'First Year', fontSize: 12, color: Colors.white),
                                                                                               onPressed: (() {
                                                                                                 FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                                   'yearLevel': 'First Year',
                                                                                                 });
                                                                                                 Navigator.of(context).pop();
-                                                                                              })),
+                                                                                              }),
+                                                                                              child: NormalText(label: 'First Year', fontSize: 12, color: Colors.white)),
                                                                                           MaterialButton(
                                                                                               color: Colors.blue,
-                                                                                              child: NormalText(label: 'Second Year', fontSize: 12, color: Colors.white),
                                                                                               onPressed: (() {
                                                                                                 FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                                   'yearLevel': 'Second Year',
                                                                                                 });
                                                                                                 Navigator.of(context).pop();
-                                                                                              })),
+                                                                                              }),
+                                                                                              child: NormalText(label: 'Second Year', fontSize: 12, color: Colors.white)),
                                                                                         ],
                                                                                       ),
                                                                                     ),
-                                                                                    SizedBox(
+                                                                                    const SizedBox(
                                                                                       height: 10,
                                                                                     ),
                                                                                     SizedBox(
@@ -1489,26 +1492,26 @@ class _ReportTabState extends State<UsersPage> {
                                                                                         children: [
                                                                                           MaterialButton(
                                                                                               color: Colors.blue,
-                                                                                              child: NormalText(label: 'Third Year', fontSize: 12, color: Colors.white),
                                                                                               onPressed: (() {
                                                                                                 FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                                   'yearLevel': 'Third Year',
                                                                                                 });
                                                                                                 Navigator.of(context).pop();
-                                                                                              })),
+                                                                                              }),
+                                                                                              child: NormalText(label: 'Third Year', fontSize: 12, color: Colors.white)),
                                                                                           MaterialButton(
                                                                                               color: Colors.blue,
-                                                                                              child: NormalText(label: 'Fourth Year', fontSize: 12, color: Colors.white),
                                                                                               onPressed: (() {
                                                                                                 FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
                                                                                                   'yearLevel': 'Fourth Year',
                                                                                                 });
                                                                                                 Navigator.of(context).pop();
-                                                                                              })),
+                                                                                              }),
+                                                                                              child: NormalText(label: 'Fourth Year', fontSize: 12, color: Colors.white)),
                                                                                         ],
                                                                                       ),
                                                                                     ),
-                                                                                    SizedBox(
+                                                                                    const SizedBox(
                                                                                       height: 10,
                                                                                     ),
                                                                                   ],
@@ -1522,7 +1525,7 @@ class _ReportTabState extends State<UsersPage> {
                                                                             context,
                                                                         builder:
                                                                             ((context) {
-                                                                          return Dialog(
+                                                                          return const Dialog(
                                                                             child:
                                                                                 SizedBox(
                                                                               height: 400,
@@ -1544,30 +1547,59 @@ class _ReportTabState extends State<UsersPage> {
                                                               ];
                                                             },
                                                           ),
-                                                          SizedBox(
+                                                          const SizedBox(
                                                             width: 20,
                                                           ),
                                                           MaterialButton(
                                                               color: Colors.red,
+                                                              onPressed: (() {
+                                                                showDialog(
+                                                                    barrierDismissible:
+                                                                        false,
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        ((context) {
+                                                                      return AlertDialog(
+                                                                        title: const Text(
+                                                                            'Delete user?'),
+                                                                        content:
+                                                                            const Text('This action cannot be undone.'),
+                                                                        actions: <
+                                                                            Widget>[
+                                                                          TextButton(
+                                                                            child:
+                                                                                const Text('Cancel'),
+                                                                            onPressed:
+                                                                                () {
+                                                                              Navigator.of(context).pop(false);
+                                                                            },
+                                                                          ),
+                                                                          TextButton(
+                                                                            child:
+                                                                                const Text('Delete'),
+                                                                            onPressed:
+                                                                                () async {
+                                                                              await FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
+                                                                                'status': 'Deleted',
+                                                                              });
+
+                                                                              if (!mounted) {
+                                                                                return;
+                                                                              }
+                                                                              Navigator.of(context).pop(true);
+                                                                            },
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    }));
+                                                              }),
                                                               child: NormalText(
                                                                   label:
                                                                       'Delete',
                                                                   fontSize: 12,
                                                                   color: Colors
-                                                                      .white),
-                                                              onPressed: (() {
-                                                                FirebaseFirestore
-                                                                    .instance
-                                                                    .collection(
-                                                                        'Users')
-                                                                    .doc(data
-                                                                        .docs[i]
-                                                                        .id)
-                                                                    .update({
-                                                                  'status':
-                                                                      'Deleted',
-                                                                });
-                                                              }))
+                                                                      .white))
                                                         ],
                                                       ),
                                                     ),

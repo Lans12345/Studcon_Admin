@@ -51,6 +51,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           Container(
+            height: 80,
+            color: Colors.white,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -223,29 +225,29 @@ class _LoginPageState extends State<LoginPage> {
                                                   height: 80,
                                                 ),
                                               ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  NormalText(
-                                                      label:
-                                                          'Not a member yet?',
-                                                      fontSize: 14,
-                                                      color: Colors.grey),
-                                                  TextButton(
-                                                    onPressed: (() {
-                                                      // Navigator.of(context).push(MaterialPageRoute(
-                                                      //     builder: (context) => SignupPage()));
-                                                      Navigation(context)
-                                                          .goToSignUpPage();
-                                                    }),
-                                                    child: NormalText(
-                                                        label: 'Register now',
-                                                        fontSize: 16,
-                                                        color: brownAccent),
-                                                  ),
-                                                ],
-                                              ),
+                                              // Row(
+                                              //   mainAxisAlignment:
+                                              //       MainAxisAlignment.center,
+                                              //   children: [
+                                              //     NormalText(
+                                              //         label:
+                                              //             'Not a member yet?',
+                                              //         fontSize: 14,
+                                              //         color: Colors.grey),
+                                              //     TextButton(
+                                              //       onPressed: (() {
+                                              //         // Navigator.of(context).push(MaterialPageRoute(
+                                              //         //     builder: (context) => SignupPage()));
+                                              //         Navigation(context)
+                                              //             .goToSignUpPage();
+                                              //       }),
+                                              //       child: NormalText(
+                                              //           label: 'Register now',
+                                              //           fontSize: 16,
+                                              //           color: brownAccent),
+                                              //     ),
+                                              //   ],
+                                              // ),
                                               const SizedBox(
                                                 height: 20,
                                               ),
@@ -262,8 +264,6 @@ class _LoginPageState extends State<LoginPage> {
                 )
               ],
             ),
-            height: 80,
-            color: Colors.white,
           ),
         ],
       ),

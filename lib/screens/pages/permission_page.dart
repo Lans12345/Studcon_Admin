@@ -389,10 +389,55 @@ class _ReportTabState extends State<PermissionPage> {
                                                     color: Colors.white),
                                                 color: Colors.red,
                                                 onPressed: (() {
-                                                  FirebaseFirestore.instance
-                                                      .collection('Concerns')
-                                                      .doc(data.docs[i].id)
-                                                      .delete();
+                                                  showDialog(
+                                                      barrierDismissible: false,
+                                                      context: context,
+                                                      builder: ((context) {
+                                                        return AlertDialog(
+                                                          title: const Text(
+                                                              'Delete permission?'),
+                                                          content: const Text(
+                                                              'This action cannot be undone.'),
+                                                          actions: <Widget>[
+                                                            TextButton(
+                                                              child: const Text(
+                                                                  'Cancel'),
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop(false);
+                                                              },
+                                                            ),
+                                                            TextButton(
+                                                              child: const Text(
+                                                                  'Delete'),
+                                                              onPressed:
+                                                                  () async {
+                                                                await FirebaseFirestore
+                                                                    .instance
+                                                                    .collection(
+                                                                        'Concerns')
+                                                                    .doc(data
+                                                                        .docs[i]
+                                                                        .id)
+                                                                    .delete();
+
+                                                                if (!mounted) {
+                                                                  return;
+                                                                }
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop(true);
+                                                              },
+                                                            ),
+                                                          ],
+                                                        );
+                                                      }));
+
+                                                  // FirebaseFirestore.instance
+                                                  //     .collection('Concerns')
+                                                  //     .doc(data.docs[i].id)
+                                                  //     .delete();
                                                 }))),
                                           ]),
                                       ],

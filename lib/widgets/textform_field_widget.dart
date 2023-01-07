@@ -8,6 +8,7 @@ class TextformfieldWidget extends StatelessWidget {
   final TextEditingController? textFieldController;
   final Widget? suffixIcon;
   final bool isObscure;
+  final bool? isForStudentReg;
   const TextformfieldWidget({
     super.key,
     required this.label,
@@ -15,6 +16,7 @@ class TextformfieldWidget extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.textFieldController,
+    this.isForStudentReg,
   });
 
   @override
@@ -34,9 +36,30 @@ class TextformfieldWidget extends StatelessWidget {
             return '$label is required';
           }
 
+          if (label == 'Email') {
+            if (isForStudentReg != null) {
+              return isForStudentReg!
+                  ? (validateStudentEmail(value)
+                      ? null
+                      : 'Use a valid institutional email')
+                  : (validateInstructorEmail(value)
+                      ? null
+                      : 'Use a valid institutional email');
+            }
+          }
+
           return null;
         },
       ),
     );
   }
+}
+
+bool validateStudentEmail(String email) {
+  RegExp regex = RegExp(r'^\d{10}@student.buksu.edu.ph$');
+  return regex.hasMatch(email);
+}
+
+bool validateInstructorEmail(String email) {
+  return email.endsWith('@buksu.edu.ph');
 }
