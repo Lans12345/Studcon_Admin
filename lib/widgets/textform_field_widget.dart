@@ -1,4 +1,3 @@
-import 'package:consultation_system/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -22,15 +21,15 @@ class TextformfieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 40,
       decoration: BoxDecoration(
-          color: greyColor, borderRadius: BorderRadius.circular(5)),
+          border: Border.all(
+            color: Colors.black,
+          ),
+          borderRadius: BorderRadius.circular(5)),
       child: TextFormField(
         obscureText: isObscure,
         controller: textFieldController,
-        decoration: InputDecoration(
-            prefixIcon: prefixIcon,
-            labelText: '    $label',
-            suffixIcon: suffixIcon),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return '$label is required';
