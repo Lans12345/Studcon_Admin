@@ -1,4 +1,3 @@
-import 'package:consultation_system/auth/signup_page.dart';
 import 'package:consultation_system/constant/colors.dart';
 import 'package:consultation_system/services/navigation.dart';
 import 'package:consultation_system/widgets/text_widget.dart';
@@ -99,17 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           MaterialButton(
-                              minWidth: 100,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              color: Colors.white,
-                              onPressed: () {},
-                              child: BoldText(
-                                  label: 'REGISTER',
-                                  fontSize: 12,
-                                  color: primary)),
-                          MaterialButton(
+                              color: primary,
                               minWidth: 100,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(7),
@@ -238,40 +227,34 @@ class _LoginPageState extends State<LoginPage> {
                                                                             10)),
                                                             onPressed:
                                                                 (() async {
-                                                              // if (loginformKey
-                                                              //     .currentState!
-                                                              //     .validate()) {
-                                                              //   try {
-                                                              //     await AuthRepository().loginOfuser(
-                                                              //         _emailController
-                                                              //             .text,
-                                                              //         _passwordController
-                                                              //             .text);
-                                                              //     // ignore: use_build_context_synchronously
-                                                              //     Navigation(
-                                                              //             context)
-                                                              //         .goToHomeScreen();
-                                                              //   } on FirebaseAuthException catch (e) {
-                                                              //     validateLogin(
-                                                              //         e);
-                                                              //   }
-                                                              // }
-
-                                                              showDialog(
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (context) {
-                                                                    return Dialog(
-                                                                      shape:
-                                                                          RoundedRectangleBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(20),
-                                                                      ),
-                                                                      child:
-                                                                          const SignupPage(),
-                                                                    );
-                                                                  });
+                                                              if (_emailController
+                                                                          .text !=
+                                                                      'admin@buksu.edu.ph' &&
+                                                                  _passwordController
+                                                                          .text !=
+                                                                      'adminbuksu') {
+                                                                Navigator.pop(
+                                                                    context);
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        NormalText(
+                                                                      label:
+                                                                          'Invalid Admin Credentials',
+                                                                      fontSize:
+                                                                          18,
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              } else {
+                                                                Navigation(
+                                                                        context)
+                                                                    .goToHomeScreen();
+                                                              }
                                                             }),
                                                             child: Padding(
                                                               padding:
@@ -289,33 +272,6 @@ class _LoginPageState extends State<LoginPage> {
                                                         child: SizedBox(
                                                           height: 80,
                                                         ),
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          NormalText(
-                                                              label:
-                                                                  'Create an account',
-                                                              fontSize: 12,
-                                                              color:
-                                                                  Colors.grey),
-                                                          TextButton(
-                                                            onPressed: (() {
-                                                              // Navigator.of(context).push(MaterialPageRoute(
-                                                              //     builder: (context) => SignupPage()));
-                                                              Navigation(
-                                                                      context)
-                                                                  .goToSignUpPage();
-                                                            }),
-                                                            child: BoldText(
-                                                                label:
-                                                                    'SIGN UP',
-                                                                fontSize: 12,
-                                                                color: primary),
-                                                          ),
-                                                        ],
                                                       ),
                                                       const SizedBox(
                                                         height: 20,

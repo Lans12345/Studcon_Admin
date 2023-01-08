@@ -2,15 +2,12 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consultation_system/constant/colors.dart';
-import 'package:consultation_system/repositories/auth_repository.dart';
 import 'package:consultation_system/repositories/user_repository.dart';
 import 'package:consultation_system/services/add_user.dart';
-import 'package:consultation_system/services/navigation.dart';
 import 'package:consultation_system/widgets/drop_down_button.dart';
 import 'package:consultation_system/widgets/text_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -34,7 +31,7 @@ class _ReportTabState extends State<UsersPage> {
   late String year = 'All';
 
   int _dropdownValue1 = 0;
-  int _dropdownValue2 = 0;
+  final int _dropdownValue2 = 0;
 
   late String course = 'All';
 
@@ -1009,14 +1006,13 @@ class _ReportTabState extends State<UsersPage> {
                                 child: year == 'Instructor'
                                     ? Container(
                                         height: 500,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: primary, width: 2),
-                                            borderRadius:
-                                                BorderRadius.circular(5),
+                                        decoration: const BoxDecoration(
                                             color: Colors.white),
                                         child: SingleChildScrollView(
                                           child: DataTable(
+                                            border: TableBorder.all(
+                                              color: Colors.grey,
+                                            ),
                                             // datatable widget
                                             columns: [
                                               // column to set the name
@@ -1049,164 +1045,174 @@ class _ReportTabState extends State<UsersPage> {
                                               for (int i = 0;
                                                   i < snapshot.data!.size;
                                                   i++)
-                                                DataRow(cells: [
-                                                  DataCell(
-                                                    NormalText(
-                                                        label: i.toString(),
-                                                        fontSize: 12,
-                                                        color: Colors.black),
-                                                  ),
-                                                  DataCell(
-                                                    NormalText(
-                                                        label: data.docs[i]
-                                                                ['first_name'] +
-                                                            ' ' +
-                                                            data.docs[i]
-                                                                ['sur_name'],
-                                                        fontSize: 12,
-                                                        color: Colors.black),
-                                                  ),
-                                                  DataCell(
-                                                    NormalText(
-                                                        label: data.docs[i]
-                                                            ['department'],
-                                                        fontSize: 12,
-                                                        color: Colors.black),
-                                                  ),
-                                                  DataCell(
-                                                    SizedBox(
-                                                      child: Row(
-                                                        children: [
-                                                          // MaterialButton(
-                                                          //     color: Colors.blue,
-                                                          //     child: NormalText(
-                                                          //         label: 'Update',
-                                                          //         fontSize: 12,
-                                                          //         color:
-                                                          //             Colors.white),
-                                                          //     onPressed: (() {})),
+                                                DataRow(
+                                                    color: MaterialStateProperty
+                                                        .resolveWith<Color?>(
+                                                            (Set<MaterialState>
+                                                                states) {
+                                                      if (i.floor().isEven) {
+                                                        return Colors
+                                                            .blueGrey[50];
+                                                      }
+                                                      return null; // Use the default value.
+                                                    }),
+                                                    cells: [
+                                                      DataCell(
+                                                        NormalText(
+                                                            label: i.toString(),
+                                                            fontSize: 12,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                      DataCell(
+                                                        NormalText(
+                                                            label: data.docs[i][
+                                                                    'first_name'] +
+                                                                ' ' +
+                                                                data.docs[i][
+                                                                    'sur_name'],
+                                                            fontSize: 12,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                      DataCell(
+                                                        NormalText(
+                                                            label: data.docs[i]
+                                                                ['department'],
+                                                            fontSize: 12,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                      DataCell(
+                                                        SizedBox(
+                                                          child: Row(
+                                                            children: [
+                                                              // MaterialButton(
+                                                              //     color: Colors.blue,
+                                                              //     child: NormalText(
+                                                              //         label: 'Update',
+                                                              //         fontSize: 12,
+                                                              //         color:
+                                                              //             Colors.white),
+                                                              //     onPressed: (() {})),
 
-                                                          MaterialButton(
-                                                              color:
-                                                                  Colors.blue,
-                                                              onPressed: (() {
-                                                                showDialog(
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        ((context) {
-                                                                      return Dialog(
-                                                                        child:
-                                                                            SizedBox(
-                                                                          height:
-                                                                              200,
-                                                                          child:
-                                                                              Padding(
-                                                                            padding: const EdgeInsets.fromLTRB(
-                                                                                10,
-                                                                                0,
-                                                                                10,
-                                                                                0),
+                                                              MaterialButton(
+                                                                  color: Colors
+                                                                      .blue,
+                                                                  onPressed:
+                                                                      (() {
+                                                                    showDialog(
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            ((context) {
+                                                                          return Dialog(
                                                                             child:
                                                                                 SizedBox(
-                                                                              width: 200,
-                                                                              child: Column(
-                                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                children: [
-                                                                                  NormalText(label: 'New Department', fontSize: 12, color: Colors.black),
-                                                                                  const SizedBox(
-                                                                                    height: 10,
+                                                                              height: 200,
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                                                                child: SizedBox(
+                                                                                  width: 200,
+                                                                                  child: Column(
+                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                    children: [
+                                                                                      NormalText(label: 'New Department', fontSize: 12, color: Colors.black),
+                                                                                      const SizedBox(
+                                                                                        height: 10,
+                                                                                      ),
+                                                                                      TextformfieldWidget(
+                                                                                        label: 'Enter Department',
+                                                                                        textFieldController: newDep,
+                                                                                      ),
+                                                                                      const SizedBox(
+                                                                                        height: 20,
+                                                                                      ),
+                                                                                      Align(
+                                                                                        alignment: Alignment.bottomRight,
+                                                                                        child: MaterialButton(
+                                                                                            color: Colors.blue,
+                                                                                            onPressed: (() {
+                                                                                              FirebaseFirestore.instance.collection('CONSULTATION-USERS').doc(data.docs[i].id).update({
+                                                                                                'department': newDep.text,
+                                                                                              });
+                                                                                              Navigator.pop(context);
+                                                                                            }),
+                                                                                            child: NormalText(label: 'Update', fontSize: 12, color: Colors.white)),
+                                                                                      )
+                                                                                    ],
                                                                                   ),
-                                                                                  TextformfieldWidget(
-                                                                                    label: 'Enter Department',
-                                                                                    textFieldController: newDep,
-                                                                                  ),
-                                                                                  const SizedBox(
-                                                                                    height: 20,
-                                                                                  ),
-                                                                                  Align(
-                                                                                    alignment: Alignment.bottomRight,
-                                                                                    child: MaterialButton(
-                                                                                        color: Colors.blue,
-                                                                                        onPressed: (() {
-                                                                                          FirebaseFirestore.instance.collection('CONSULTATION-USERS').doc(data.docs[i].id).update({
-                                                                                            'department': newDep.text,
-                                                                                          });
-                                                                                          Navigator.pop(context);
-                                                                                        }),
-                                                                                        child: NormalText(label: 'Update', fontSize: 12, color: Colors.white)),
-                                                                                  )
-                                                                                ],
+                                                                                ),
                                                                               ),
                                                                             ),
-                                                                          ),
-                                                                        ),
-                                                                      );
-                                                                    }));
-                                                                // FirebaseFirestore
-                                                                //     .instance
-                                                                //     .collection(
-                                                                //         'CONSULTATION-USERS')
-                                                                //     .doc(data
-                                                                //         .docs[i]
-                                                                //         .id)
-                                                                //     .update({
-                                                                //   'status':
-                                                                //       'Inactive',
-                                                                // });
-                                                              }),
-                                                              child: NormalText(
-                                                                  label:
-                                                                      'Update',
-                                                                  fontSize: 12,
-                                                                  color: Colors
-                                                                      .white)),
+                                                                          );
+                                                                        }));
+                                                                    // FirebaseFirestore
+                                                                    //     .instance
+                                                                    //     .collection(
+                                                                    //         'CONSULTATION-USERS')
+                                                                    //     .doc(data
+                                                                    //         .docs[i]
+                                                                    //         .id)
+                                                                    //     .update({
+                                                                    //   'status':
+                                                                    //       'Inactive',
+                                                                    // });
+                                                                  }),
+                                                                  child: NormalText(
+                                                                      label:
+                                                                          'Update',
+                                                                      fontSize:
+                                                                          12,
+                                                                      color: Colors
+                                                                          .white)),
 
-                                                          const SizedBox(
-                                                            width: 20,
-                                                          ),
-                                                          MaterialButton(
-                                                              color: Colors.red,
-                                                              onPressed:
-                                                                  (() async {
-                                                                await FirebaseFirestore
-                                                                    .instance
-                                                                    .collection(
-                                                                        'CONSULTATION-USERS')
-                                                                    .doc(data
-                                                                        .docs[i]
-                                                                        .id)
-                                                                    .update({
-                                                                  'status':
-                                                                      'Inactive',
-                                                                });
-                                                              }),
-                                                              child: NormalText(
-                                                                  label:
-                                                                      'Delete',
-                                                                  fontSize: 12,
+                                                              const SizedBox(
+                                                                width: 20,
+                                                              ),
+                                                              MaterialButton(
                                                                   color: Colors
-                                                                      .white))
-                                                        ],
+                                                                      .red,
+                                                                  onPressed:
+                                                                      (() async {
+                                                                    await FirebaseFirestore
+                                                                        .instance
+                                                                        .collection(
+                                                                            'CONSULTATION-USERS')
+                                                                        .doc(data
+                                                                            .docs[i]
+                                                                            .id)
+                                                                        .update({
+                                                                      'status':
+                                                                          'Inactive',
+                                                                    });
+                                                                  }),
+                                                                  child: NormalText(
+                                                                      label:
+                                                                          'Delete',
+                                                                      fontSize:
+                                                                          12,
+                                                                      color: Colors
+                                                                          .white))
+                                                            ],
+                                                          ),
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ),
-                                                ]),
+                                                    ]),
                                             ],
                                           ),
                                         ),
                                       )
                                     : Container(
                                         height: 500,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: primary, width: 2),
-                                            borderRadius:
-                                                BorderRadius.circular(5),
+                                        decoration: const BoxDecoration(
                                             color: Colors.white),
                                         child: SingleChildScrollView(
                                           child: DataTable(
+                                            border: TableBorder.all(
+                                              color: Colors.grey,
+                                            ),
                                             // datatable widget
                                             columns: [
                                               // column to set the name
@@ -1244,367 +1250,378 @@ class _ReportTabState extends State<UsersPage> {
                                               for (int i = 0;
                                                   i < snapshot.data!.size;
                                                   i++)
-                                                DataRow(cells: [
-                                                  DataCell(
-                                                    NormalText(
-                                                        label: i.toString(),
-                                                        fontSize: 12,
-                                                        color: Colors.black),
-                                                  ),
-                                                  DataCell(
-                                                    NormalText(
-                                                        label: data.docs[i]
-                                                            ['name'],
-                                                        fontSize: 12,
-                                                        color: Colors.black),
-                                                  ),
-                                                  DataCell(
-                                                    NormalText(
-                                                        label: data.docs[i]
-                                                            ['course'],
-                                                        fontSize: 12,
-                                                        color: Colors.black),
-                                                  ),
-                                                  DataCell(
-                                                    NormalText(
-                                                        label: data.docs[i]
-                                                            ['yearLevel'],
-                                                        fontSize: 12,
-                                                        color: Colors.black),
-                                                  ),
-                                                  DataCell(
-                                                    SizedBox(
-                                                      child: Row(
-                                                        children: [
-                                                          // MaterialButton(
-                                                          //     color: Colors.blue,
-                                                          //     child: NormalText(
-                                                          //         label: 'Update',
-                                                          //         fontSize: 12,
-                                                          //         color:
-                                                          //             Colors.white),
-                                                          //     onPressed: (() {})),
-                                                          PopupMenuButton(
-                                                            tooltip:
-                                                                'Update User Info',
-                                                            icon: const Icon(
-                                                              Icons
-                                                                  .person_add_alt_outlined,
-                                                              color:
-                                                                  Colors.blue,
-                                                            ),
-                                                            // child: MaterialButton(
-                                                            //     color: Colors.blue,
-                                                            //     child: NormalText(
-                                                            //         label: 'Update',
-                                                            //         fontSize: 12,
-                                                            //         color:
-                                                            //             Colors.white),
-                                                            //     onPressed: (() {
-                                                            //       // FirebaseFirestore
-                                                            //       //     .instance
-                                                            //       //     .collection(
-                                                            //       //         'Users')
-                                                            //       //     .doc(data
-                                                            //       //         .docs[index]
-                                                            //       //         .id)
-                                                            //       //     .update({
-                                                            //       //   'status':
-                                                            //       //       'Deleted',
-                                                            //       // });
-                                                            //     })),
-                                                            itemBuilder:
-                                                                (context) {
-                                                              return [
-                                                                PopupMenuItem(
-                                                                  onTap: (() {
-                                                                    showDialog(
-                                                                        context:
-                                                                            context,
-                                                                        builder:
-                                                                            ((context) {
-                                                                          return Dialog(
-                                                                            child:
-                                                                                SizedBox(
-                                                                              height: 200,
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                                                                                child: Column(
-                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                  children: [
-                                                                                    NormalText(label: 'Choose Course', fontSize: 14, color: Colors.black),
-                                                                                    const SizedBox(
-                                                                                      height: 20,
-                                                                                    ),
-                                                                                    SizedBox(
-                                                                                      width: 220,
-                                                                                      child: Row(
-                                                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                        children: [
-                                                                                          MaterialButton(
-                                                                                              color: Colors.blue,
-                                                                                              onPressed: (() {
-                                                                                                FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
-                                                                                                  'course': 'Automotive',
-                                                                                                });
-                                                                                                Navigator.of(context).pop();
-                                                                                              }),
-                                                                                              child: NormalText(label: 'Automotive', fontSize: 12, color: Colors.white)),
-                                                                                          MaterialButton(
-                                                                                              color: Colors.blue,
-                                                                                              onPressed: (() {
-                                                                                                FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
-                                                                                                  'course': 'Food Technology',
-                                                                                                });
-                                                                                                Navigator.of(context).pop();
-                                                                                              }),
-                                                                                              child: NormalText(label: 'Food Technology', fontSize: 12, color: Colors.white)),
-                                                                                        ],
-                                                                                      ),
-                                                                                    ),
-                                                                                    const SizedBox(
-                                                                                      height: 10,
-                                                                                    ),
-                                                                                    SizedBox(
-                                                                                      width: 410,
-                                                                                      child: Row(
-                                                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                        children: [
-                                                                                          MaterialButton(
-                                                                                              color: Colors.blue,
-                                                                                              onPressed: (() {
-                                                                                                FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
-                                                                                                  'course': 'Electronic Technology',
-                                                                                                });
-                                                                                                Navigator.of(context).pop();
-                                                                                              }),
-                                                                                              child: NormalText(label: 'Electronic Technology', fontSize: 12, color: Colors.white)),
-                                                                                          MaterialButton(
-                                                                                              color: Colors.blue,
-                                                                                              onPressed: (() {
-                                                                                                FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
-                                                                                                  'course': 'Entertainment and Multimedia Computing',
-                                                                                                });
-                                                                                                Navigator.of(context).pop();
-                                                                                              }),
-                                                                                              child: NormalText(label: 'Entertainment and Multimedia Computing', fontSize: 12, color: Colors.white)),
-                                                                                        ],
-                                                                                      ),
-                                                                                    ),
-                                                                                    const SizedBox(
-                                                                                      height: 10,
-                                                                                    ),
-                                                                                    MaterialButton(
-                                                                                        color: Colors.blue,
-                                                                                        onPressed: (() {
-                                                                                          FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
-                                                                                            'course': 'Information Technology',
-                                                                                          });
-                                                                                          Navigator.of(context).pop();
-                                                                                        }),
-                                                                                        child: NormalText(label: 'Information Technology', fontSize: 12, color: Colors.white)),
-                                                                                  ],
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          );
-                                                                        }));
-                                                                    showDialog(
-                                                                        context:
-                                                                            context,
-                                                                        builder:
-                                                                            ((context) {
-                                                                          return const Dialog(
-                                                                            child:
-                                                                                SizedBox(
-                                                                              height: 400,
-                                                                            ),
-                                                                          );
-                                                                        }));
-                                                                  }),
-                                                                  child:
-                                                                      ListTile(
-                                                                    title: NormalText(
-                                                                        label:
-                                                                            'Edit Course',
-                                                                        fontSize:
-                                                                            12,
-                                                                        color: Colors
-                                                                            .black),
-                                                                  ),
-                                                                ),
-                                                                PopupMenuItem(
-                                                                  onTap:
-                                                                      (() async {
-                                                                    showDialog(
-                                                                        context:
-                                                                            context,
-                                                                        builder:
-                                                                            ((context) {
-                                                                          return Dialog(
-                                                                            child:
-                                                                                SizedBox(
-                                                                              height: 400,
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                                                                                child: Column(
-                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                  children: [
-                                                                                    NormalText(label: 'Edit Year Level', fontSize: 12, color: Colors.black),
-                                                                                    const SizedBox(
-                                                                                      height: 20,
-                                                                                    ),
-                                                                                    SizedBox(
-                                                                                      width: 180,
-                                                                                      child: Row(
-                                                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                        children: [
-                                                                                          MaterialButton(
-                                                                                              color: Colors.blue,
-                                                                                              onPressed: (() {
-                                                                                                FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
-                                                                                                  'yearLevel': 'First Year',
-                                                                                                });
-                                                                                                Navigator.of(context).pop();
-                                                                                              }),
-                                                                                              child: NormalText(label: 'First Year', fontSize: 12, color: Colors.white)),
-                                                                                          MaterialButton(
-                                                                                              color: Colors.blue,
-                                                                                              onPressed: (() {
-                                                                                                FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
-                                                                                                  'yearLevel': 'Second Year',
-                                                                                                });
-                                                                                                Navigator.of(context).pop();
-                                                                                              }),
-                                                                                              child: NormalText(label: 'Second Year', fontSize: 12, color: Colors.white)),
-                                                                                        ],
-                                                                                      ),
-                                                                                    ),
-                                                                                    const SizedBox(
-                                                                                      height: 10,
-                                                                                    ),
-                                                                                    SizedBox(
-                                                                                      width: 180,
-                                                                                      child: Row(
-                                                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                        children: [
-                                                                                          MaterialButton(
-                                                                                              color: Colors.blue,
-                                                                                              onPressed: (() {
-                                                                                                FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
-                                                                                                  'yearLevel': 'Third Year',
-                                                                                                });
-                                                                                                Navigator.of(context).pop();
-                                                                                              }),
-                                                                                              child: NormalText(label: 'Third Year', fontSize: 12, color: Colors.white)),
-                                                                                          MaterialButton(
-                                                                                              color: Colors.blue,
-                                                                                              onPressed: (() {
-                                                                                                FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
-                                                                                                  'yearLevel': 'Fourth Year',
-                                                                                                });
-                                                                                                Navigator.of(context).pop();
-                                                                                              }),
-                                                                                              child: NormalText(label: 'Fourth Year', fontSize: 12, color: Colors.white)),
-                                                                                        ],
-                                                                                      ),
-                                                                                    ),
-                                                                                    const SizedBox(
-                                                                                      height: 10,
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          );
-                                                                        }));
-                                                                    showDialog(
-                                                                        context:
-                                                                            context,
-                                                                        builder:
-                                                                            ((context) {
-                                                                          return const Dialog(
-                                                                            child:
-                                                                                SizedBox(
-                                                                              height: 400,
-                                                                            ),
-                                                                          );
-                                                                        }));
-                                                                  }),
-                                                                  child:
-                                                                      ListTile(
-                                                                    title: NormalText(
-                                                                        label:
-                                                                            'Edit Year Level',
-                                                                        fontSize:
-                                                                            12,
-                                                                        color: Colors
-                                                                            .black),
-                                                                  ),
-                                                                ),
-                                                              ];
-                                                            },
-                                                          ),
-                                                          const SizedBox(
-                                                            width: 20,
-                                                          ),
-                                                          MaterialButton(
-                                                              color: Colors.red,
-                                                              onPressed: (() {
-                                                                showDialog(
-                                                                    barrierDismissible:
-                                                                        false,
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        ((context) {
-                                                                      return AlertDialog(
-                                                                        title: const Text(
-                                                                            'Delete user?'),
-                                                                        content:
-                                                                            const Text('This action cannot be undone.'),
-                                                                        actions: <
-                                                                            Widget>[
-                                                                          TextButton(
-                                                                            child:
-                                                                                const Text('Cancel'),
-                                                                            onPressed:
-                                                                                () {
-                                                                              Navigator.of(context).pop(false);
-                                                                            },
-                                                                          ),
-                                                                          TextButton(
-                                                                            child:
-                                                                                const Text('Delete'),
-                                                                            onPressed:
-                                                                                () async {
-                                                                              await FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
-                                                                                'status': 'Deleted',
-                                                                              });
-
-                                                                              if (!mounted) {
-                                                                                return;
-                                                                              }
-                                                                              Navigator.of(context).pop(true);
-                                                                            },
-                                                                          ),
-                                                                        ],
-                                                                      );
-                                                                    }));
-                                                              }),
-                                                              child: NormalText(
-                                                                  label:
-                                                                      'Delete',
-                                                                  fontSize: 12,
-                                                                  color: Colors
-                                                                      .white))
-                                                        ],
+                                                DataRow(
+                                                    color: MaterialStateProperty
+                                                        .resolveWith<Color?>(
+                                                            (Set<MaterialState>
+                                                                states) {
+                                                      if (i.floor().isEven) {
+                                                        return Colors
+                                                            .blueGrey[50];
+                                                      }
+                                                      return null; // Use the default value.
+                                                    }),
+                                                    cells: [
+                                                      DataCell(
+                                                        NormalText(
+                                                            label: i.toString(),
+                                                            fontSize: 12,
+                                                            color:
+                                                                Colors.black),
                                                       ),
-                                                    ),
-                                                  ),
-                                                ]),
+                                                      DataCell(
+                                                        NormalText(
+                                                            label: data.docs[i]
+                                                                ['name'],
+                                                            fontSize: 12,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                      DataCell(
+                                                        NormalText(
+                                                            label: data.docs[i]
+                                                                ['course'],
+                                                            fontSize: 12,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                      DataCell(
+                                                        NormalText(
+                                                            label: data.docs[i]
+                                                                ['yearLevel'],
+                                                            fontSize: 12,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                      DataCell(
+                                                        SizedBox(
+                                                          child: Row(
+                                                            children: [
+                                                              // MaterialButton(
+                                                              //     color: Colors.blue,
+                                                              //     child: NormalText(
+                                                              //         label: 'Update',
+                                                              //         fontSize: 12,
+                                                              //         color:
+                                                              //             Colors.white),
+                                                              //     onPressed: (() {})),
+                                                              PopupMenuButton(
+                                                                tooltip:
+                                                                    'Update User Info',
+                                                                icon:
+                                                                    const Icon(
+                                                                  Icons
+                                                                      .person_add_alt_outlined,
+                                                                  color: Colors
+                                                                      .blue,
+                                                                ),
+                                                                // child: MaterialButton(
+                                                                //     color: Colors.blue,
+                                                                //     child: NormalText(
+                                                                //         label: 'Update',
+                                                                //         fontSize: 12,
+                                                                //         color:
+                                                                //             Colors.white),
+                                                                //     onPressed: (() {
+                                                                //       // FirebaseFirestore
+                                                                //       //     .instance
+                                                                //       //     .collection(
+                                                                //       //         'Users')
+                                                                //       //     .doc(data
+                                                                //       //         .docs[index]
+                                                                //       //         .id)
+                                                                //       //     .update({
+                                                                //       //   'status':
+                                                                //       //       'Deleted',
+                                                                //       // });
+                                                                //     })),
+                                                                itemBuilder:
+                                                                    (context) {
+                                                                  return [
+                                                                    PopupMenuItem(
+                                                                      onTap:
+                                                                          (() {
+                                                                        showDialog(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                ((context) {
+                                                                              return Dialog(
+                                                                                child: SizedBox(
+                                                                                  height: 200,
+                                                                                  child: Padding(
+                                                                                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                                                                                    child: Column(
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                      children: [
+                                                                                        NormalText(label: 'Choose Course', fontSize: 14, color: Colors.black),
+                                                                                        const SizedBox(
+                                                                                          height: 20,
+                                                                                        ),
+                                                                                        SizedBox(
+                                                                                          width: 220,
+                                                                                          child: Row(
+                                                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                            children: [
+                                                                                              MaterialButton(
+                                                                                                  color: Colors.blue,
+                                                                                                  onPressed: (() {
+                                                                                                    FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
+                                                                                                      'course': 'Automotive',
+                                                                                                    });
+                                                                                                    Navigator.of(context).pop();
+                                                                                                  }),
+                                                                                                  child: NormalText(label: 'Automotive', fontSize: 12, color: Colors.white)),
+                                                                                              MaterialButton(
+                                                                                                  color: Colors.blue,
+                                                                                                  onPressed: (() {
+                                                                                                    FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
+                                                                                                      'course': 'Food Technology',
+                                                                                                    });
+                                                                                                    Navigator.of(context).pop();
+                                                                                                  }),
+                                                                                                  child: NormalText(label: 'Food Technology', fontSize: 12, color: Colors.white)),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ),
+                                                                                        const SizedBox(
+                                                                                          height: 10,
+                                                                                        ),
+                                                                                        SizedBox(
+                                                                                          width: 410,
+                                                                                          child: Row(
+                                                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                            children: [
+                                                                                              MaterialButton(
+                                                                                                  color: Colors.blue,
+                                                                                                  onPressed: (() {
+                                                                                                    FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
+                                                                                                      'course': 'Electronic Technology',
+                                                                                                    });
+                                                                                                    Navigator.of(context).pop();
+                                                                                                  }),
+                                                                                                  child: NormalText(label: 'Electronic Technology', fontSize: 12, color: Colors.white)),
+                                                                                              MaterialButton(
+                                                                                                  color: Colors.blue,
+                                                                                                  onPressed: (() {
+                                                                                                    FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
+                                                                                                      'course': 'Entertainment and Multimedia Computing',
+                                                                                                    });
+                                                                                                    Navigator.of(context).pop();
+                                                                                                  }),
+                                                                                                  child: NormalText(label: 'Entertainment and Multimedia Computing', fontSize: 12, color: Colors.white)),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ),
+                                                                                        const SizedBox(
+                                                                                          height: 10,
+                                                                                        ),
+                                                                                        MaterialButton(
+                                                                                            color: Colors.blue,
+                                                                                            onPressed: (() {
+                                                                                              FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
+                                                                                                'course': 'Information Technology',
+                                                                                              });
+                                                                                              Navigator.of(context).pop();
+                                                                                            }),
+                                                                                            child: NormalText(label: 'Information Technology', fontSize: 12, color: Colors.white)),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              );
+                                                                            }));
+                                                                        showDialog(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                ((context) {
+                                                                              return const Dialog(
+                                                                                child: SizedBox(
+                                                                                  height: 400,
+                                                                                ),
+                                                                              );
+                                                                            }));
+                                                                      }),
+                                                                      child:
+                                                                          ListTile(
+                                                                        title: NormalText(
+                                                                            label:
+                                                                                'Edit Course',
+                                                                            fontSize:
+                                                                                12,
+                                                                            color:
+                                                                                Colors.black),
+                                                                      ),
+                                                                    ),
+                                                                    PopupMenuItem(
+                                                                      onTap:
+                                                                          (() async {
+                                                                        showDialog(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                ((context) {
+                                                                              return Dialog(
+                                                                                child: SizedBox(
+                                                                                  height: 400,
+                                                                                  child: Padding(
+                                                                                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                                                                    child: Column(
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                      children: [
+                                                                                        NormalText(label: 'Edit Year Level', fontSize: 12, color: Colors.black),
+                                                                                        const SizedBox(
+                                                                                          height: 20,
+                                                                                        ),
+                                                                                        SizedBox(
+                                                                                          width: 180,
+                                                                                          child: Row(
+                                                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                            children: [
+                                                                                              MaterialButton(
+                                                                                                  color: Colors.blue,
+                                                                                                  onPressed: (() {
+                                                                                                    FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
+                                                                                                      'yearLevel': 'First Year',
+                                                                                                    });
+                                                                                                    Navigator.of(context).pop();
+                                                                                                  }),
+                                                                                                  child: NormalText(label: 'First Year', fontSize: 12, color: Colors.white)),
+                                                                                              MaterialButton(
+                                                                                                  color: Colors.blue,
+                                                                                                  onPressed: (() {
+                                                                                                    FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
+                                                                                                      'yearLevel': 'Second Year',
+                                                                                                    });
+                                                                                                    Navigator.of(context).pop();
+                                                                                                  }),
+                                                                                                  child: NormalText(label: 'Second Year', fontSize: 12, color: Colors.white)),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ),
+                                                                                        const SizedBox(
+                                                                                          height: 10,
+                                                                                        ),
+                                                                                        SizedBox(
+                                                                                          width: 180,
+                                                                                          child: Row(
+                                                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                            children: [
+                                                                                              MaterialButton(
+                                                                                                  color: Colors.blue,
+                                                                                                  onPressed: (() {
+                                                                                                    FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
+                                                                                                      'yearLevel': 'Third Year',
+                                                                                                    });
+                                                                                                    Navigator.of(context).pop();
+                                                                                                  }),
+                                                                                                  child: NormalText(label: 'Third Year', fontSize: 12, color: Colors.white)),
+                                                                                              MaterialButton(
+                                                                                                  color: Colors.blue,
+                                                                                                  onPressed: (() {
+                                                                                                    FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
+                                                                                                      'yearLevel': 'Fourth Year',
+                                                                                                    });
+                                                                                                    Navigator.of(context).pop();
+                                                                                                  }),
+                                                                                                  child: NormalText(label: 'Fourth Year', fontSize: 12, color: Colors.white)),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ),
+                                                                                        const SizedBox(
+                                                                                          height: 10,
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              );
+                                                                            }));
+                                                                        showDialog(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                ((context) {
+                                                                              return const Dialog(
+                                                                                child: SizedBox(
+                                                                                  height: 400,
+                                                                                ),
+                                                                              );
+                                                                            }));
+                                                                      }),
+                                                                      child:
+                                                                          ListTile(
+                                                                        title: NormalText(
+                                                                            label:
+                                                                                'Edit Year Level',
+                                                                            fontSize:
+                                                                                12,
+                                                                            color:
+                                                                                Colors.black),
+                                                                      ),
+                                                                    ),
+                                                                  ];
+                                                                },
+                                                              ),
+                                                              const SizedBox(
+                                                                width: 20,
+                                                              ),
+                                                              MaterialButton(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  onPressed:
+                                                                      (() {
+                                                                    showDialog(
+                                                                        barrierDismissible:
+                                                                            false,
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            ((context) {
+                                                                          return AlertDialog(
+                                                                            title:
+                                                                                const Text('Delete user?'),
+                                                                            content:
+                                                                                const Text('This action cannot be undone.'),
+                                                                            actions: <Widget>[
+                                                                              TextButton(
+                                                                                child: const Text('Cancel'),
+                                                                                onPressed: () {
+                                                                                  Navigator.of(context).pop(false);
+                                                                                },
+                                                                              ),
+                                                                              TextButton(
+                                                                                child: const Text('Delete'),
+                                                                                onPressed: () async {
+                                                                                  await FirebaseFirestore.instance.collection('Users').doc(data.docs[i].id).update({
+                                                                                    'status': 'Deleted',
+                                                                                  });
+
+                                                                                  if (!mounted) {
+                                                                                    return;
+                                                                                  }
+                                                                                  Navigator.of(context).pop(true);
+                                                                                },
+                                                                              ),
+                                                                            ],
+                                                                          );
+                                                                        }));
+                                                                  }),
+                                                                  child: NormalText(
+                                                                      label:
+                                                                          'Delete',
+                                                                      fontSize:
+                                                                          12,
+                                                                      color: Colors
+                                                                          .white))
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ]),
                                             ],
                                           ),
                                         ),

@@ -1,21 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consultation_system/screens/pages/permission_page.dart';
-import 'package:consultation_system/screens/pages/roles_page.dart';
 import 'package:consultation_system/screens/pages/users_page.dart';
 import 'package:consultation_system/screens/tabs/analytics_tab.dart';
-import 'package:consultation_system/screens/tabs/dashboard_tab.dart';
-import 'package:consultation_system/screens/tabs/feedback_tab.dart';
-import 'package:consultation_system/screens/tabs/messages_tab.dart';
-import 'package:consultation_system/screens/tabs/notif_tab.dart';
 import 'package:consultation_system/screens/tabs/reports_tab.dart';
-import 'package:consultation_system/screens/tabs/settings_tab.dart';
 import 'package:consultation_system/services/add_categ.dart';
 import 'package:consultation_system/widgets/textform_field_widget.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../constant/colors.dart';
 import '../widgets/text_widget.dart';
@@ -64,30 +56,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   // backgroundColor: Colors.blueGrey[700]
                   ),
               title: Container(
-                decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    border: const Border(
-                        bottom: BorderSide(width: 1, color: greyAccent))),
+                decoration: const BoxDecoration(
+                  color: primary,
+                ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Image.asset(
-                        'assets/images/bsu.png',
-                        width: 33,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      BoldText(
-                        label: 'STUDCON',
-                        fontSize: 24,
-                        color: blueAccent,
-                      ),
-                    ],
+                  padding: const EdgeInsets.all(15.0),
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/bsu.png',
+                      height: 120,
+                    ),
                   ),
                 ),
               ),
@@ -102,11 +80,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SideMenuItem(
                   priority: 1,
-                  title: 'Users',
+                  title: 'User Management',
                   onTap: () {
                     page.jumpToPage(1);
                   },
-                  icon: const Icon(Icons.group),
+                  icon: const Icon(Icons.home),
                 ),
                 SideMenuItem(
                   priority: 2,
@@ -123,22 +101,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     page.jumpToPage(3);
                   },
                   icon: const Icon(Icons.analytics),
-                ),
-                SideMenuItem(
-                  priority: 4,
-                  title: 'Feedback',
-                  onTap: () {
-                    page.jumpToPage(4);
-                  },
-                  icon: const Icon(Icons.feedback),
-                ),
-                SideMenuItem(
-                  onTap: () {
-                    page.jumpToPage(5);
-                  },
-                  priority: 5,
-                  title: 'Settings',
-                  icon: const Icon(Icons.settings),
                 ),
                 SideMenuItem(
                   onTap: () {
@@ -327,12 +289,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   page: page,
                 ),
                 AnalyticsTab(
-                  page: page,
-                ),
-                FeedbackTab(
-                  page: page,
-                ),
-                SettingsTab(
                   page: page,
                 ),
               ],
