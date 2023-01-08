@@ -6,6 +6,7 @@ import 'package:consultation_system/widgets/textform_field_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../widgets/appabr_widget.dart';
 
@@ -54,11 +55,13 @@ class _SettingsTabState extends State<SettingsTab> {
     });
   }
 
+  final box = GetStorage();
+
   @override
   Widget build(BuildContext context) {
     final Stream<DocumentSnapshot> userData = FirebaseFirestore.instance
         .collection('CONSULTATION-USERS')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(box.read('id'))
         .snapshots();
     return Scaffold(
         appBar: appbarWidget(widget.page),

@@ -3,11 +3,13 @@ import 'package:consultation_system/constant/uid.dart';
 import 'package:consultation_system/widgets/text_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 PreferredSizeWidget appbarWidget(PageController page) {
+  final box = GetStorage();
   final Stream<DocumentSnapshot> userData = FirebaseFirestore.instance
       .collection('CONSULTATION-USERS')
-      .doc(FirebaseAuthToken().uid)
+      .doc(box.read('id'))
       .snapshots();
 
   return AppBar(
@@ -29,7 +31,7 @@ PreferredSizeWidget appbarWidget(PageController page) {
               backgroundImage: NetworkImage(data['profilePicture']),
             );
           }),
-      SizedBox(
+      const SizedBox(
         width: 10,
       ),
       StreamBuilder<DocumentSnapshot>(
@@ -49,11 +51,11 @@ PreferredSizeWidget appbarWidget(PageController page) {
                     fontSize: 18,
                     color: Colors.black));
           }),
-      SizedBox(
+      const SizedBox(
         width: 10,
       ),
       PopupMenuButton(
-        icon: Icon(
+        icon: const Icon(
           Icons.arrow_drop_down,
           color: Colors.black,
         ),
@@ -64,7 +66,7 @@ PreferredSizeWidget appbarWidget(PageController page) {
                 page.jumpToPage(6);
               }),
               child: ListTile(
-                leading: Icon(Icons.edit),
+                leading: const Icon(Icons.edit),
                 title: NormalText(
                     label: 'Edit Profile', fontSize: 12, color: Colors.black),
               ),
@@ -77,7 +79,7 @@ PreferredSizeWidget appbarWidget(PageController page) {
                 Navigator.pushReplacementNamed(context, '/loginpage');
               }),
               child: ListTile(
-                leading: Icon(Icons.logout),
+                leading: const Icon(Icons.logout),
                 title: NormalText(
                     label: 'Logout', fontSize: 12, color: Colors.black),
               ),
@@ -85,7 +87,7 @@ PreferredSizeWidget appbarWidget(PageController page) {
           ];
         },
       ),
-      SizedBox(
+      const SizedBox(
         width: 20,
       ),
     ],

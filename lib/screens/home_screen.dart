@@ -1,12 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consultation_system/screens/pages/permission_page.dart';
+import 'package:consultation_system/screens/pages/roles_page.dart';
 import 'package:consultation_system/screens/pages/users_page.dart';
 import 'package:consultation_system/screens/tabs/analytics_tab.dart';
+import 'package:consultation_system/screens/tabs/dashboard_tab.dart';
 import 'package:consultation_system/screens/tabs/feedback_tab.dart';
+import 'package:consultation_system/screens/tabs/messages_tab.dart';
+import 'package:consultation_system/screens/tabs/notif_tab.dart';
 import 'package:consultation_system/screens/tabs/reports_tab.dart';
 import 'package:consultation_system/screens/tabs/settings_tab.dart';
+import 'package:consultation_system/services/add_categ.dart';
+import 'package:consultation_system/widgets/textform_field_widget.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../constant/colors.dart';
 import '../widgets/text_widget.dart';
@@ -22,6 +31,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   PageController page = PageController();
+
+  final categController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -128,6 +139,180 @@ class _HomeScreenState extends State<HomeScreen> {
                   priority: 5,
                   title: 'Settings',
                   icon: const Icon(Icons.settings),
+                ),
+                SideMenuItem(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: ((context) {
+                          return Dialog(
+                            child: SizedBox(
+                              height: 400,
+                              width: 400,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 20),
+                                      child: Align(
+                                        alignment: Alignment.topRight,
+                                        child: MaterialButton(
+                                            color: Colors.green,
+                                            onPressed: (() {
+                                              Navigator.pop(context);
+                                              showDialog(
+                                                  context: context,
+                                                  builder: ((context) {
+                                                    return Dialog(
+                                                      child: SizedBox(
+                                                        height: 250,
+                                                        width: 300,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .fromLTRB(
+                                                                  10,
+                                                                  10,
+                                                                  10,
+                                                                  10),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              NormalText(
+                                                                  label:
+                                                                      'Name of Category',
+                                                                  fontSize: 14,
+                                                                  color: Colors
+                                                                      .black),
+                                                              const SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              TextformfieldWidget(
+                                                                  textFieldController:
+                                                                      categController,
+                                                                  label: ''),
+                                                              const SizedBox(
+                                                                height: 20,
+                                                              ),
+                                                              Align(
+                                                                alignment: Alignment
+                                                                    .bottomRight,
+                                                                child:
+                                                                    MaterialButton(
+                                                                        color: Colors
+                                                                            .green,
+                                                                        onPressed:
+                                                                            (() {
+                                                                          Navigator.of(context)
+                                                                              .pop();
+                                                                          addCateg(
+                                                                              categController.text);
+
+                                                                          categController
+                                                                              .clear();
+                                                                        }),
+                                                                        child: NormalText(
+                                                                            label:
+                                                                                'Continue',
+                                                                            fontSize:
+                                                                                12,
+                                                                            color:
+                                                                                Colors.white)),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }));
+                                            }),
+                                            child: NormalText(
+                                                label: 'Add Category',
+                                                fontSize: 12,
+                                                color: Colors.white)),
+                                      ),
+                                    ),
+                                    StreamBuilder<QuerySnapshot>(
+                                        stream: FirebaseFirestore.instance
+                                            .collection('Categ')
+                                            .snapshots(),
+                                        builder: (BuildContext context,
+                                            AsyncSnapshot<QuerySnapshot>
+                                                snapshot) {
+                                          if (snapshot.hasError) {
+                                            print(snapshot.error);
+                                            return const Center(
+                                                child: Text('Error'));
+                                          }
+                                          if (snapshot.connectionState ==
+                                              ConnectionState.waiting) {
+                                            print('waiting');
+                                            return const Padding(
+                                              padding: EdgeInsets.only(top: 50),
+                                              child: Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                color: Colors.black,
+                                              )),
+                                            );
+                                          }
+
+                                          final data = snapshot.requireData;
+                                          return Expanded(
+                                            child: SizedBox(
+                                              child: ListView.builder(
+                                                  itemCount:
+                                                      snapshot.data?.size ?? 0,
+                                                  itemBuilder:
+                                                      ((context, index) {
+                                                    return ListTile(
+                                                      tileColor: Colors.white,
+                                                      title: NormalText(
+                                                          label:
+                                                              data.docs[index]
+                                                                  ['name'],
+                                                          fontSize: 12,
+                                                          color: Colors.black),
+                                                      trailing: IconButton(
+                                                        onPressed: (() {
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  'Categ')
+                                                              .doc(data
+                                                                  .docs[index]
+                                                                  .id)
+                                                              .delete();
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        }),
+                                                        icon: const Icon(
+                                                          Icons.delete,
+                                                          color: Colors.red,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  })),
+                                            ),
+                                          );
+                                        }),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        }));
+                  },
+                  priority: 6,
+                  title: 'Categories',
+                  icon: const Icon(Icons.category_outlined),
                 ),
               ],
             ),

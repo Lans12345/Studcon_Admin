@@ -136,6 +136,8 @@ class _DashboardTabState extends State<DashboardTab> {
     }
   }
 
+  var hasLoaded = false;
+
   int message = 0;
   getMessage() async {
     // Use provider
@@ -148,6 +150,7 @@ class _DashboardTabState extends State<DashboardTab> {
         for (var queryDocumentSnapshot in querySnapshot.docs) {
           Map<String, dynamic> data = queryDocumentSnapshot.data();
           message = querySnapshot.size;
+          hasLoaded = true;
         }
       });
     }
@@ -170,7 +173,7 @@ class _DashboardTabState extends State<DashboardTab> {
                 height: 20,
               ),
               NormalText(label: "Dashboard", fontSize: 24, color: primary),
-              NormalText(label: "(${date})", fontSize: 18, color: brownAccent),
+              NormalText(label: "($date)", fontSize: 18, color: brownAccent),
               const SizedBox(
                 height: 20,
               ),
@@ -250,7 +253,7 @@ class _DashboardTabState extends State<DashboardTab> {
               ),
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 18),
+                  padding: const EdgeInsets.only(left: 18, bottom: 20),
                   child: Container(
                     padding:
                         const EdgeInsets.only(left: 20, top: 10, right: 20),
@@ -270,56 +273,83 @@ class _DashboardTabState extends State<DashboardTab> {
                         const SizedBox(
                           height: 20,
                         ),
-                        ListTile(
-                          leading: NormalText(
-                              label: 'Grades', fontSize: 12, color: primary),
-                          trailing: BoldText(
-                              label: total1.toString(),
-                              fontSize: 12,
-                              color: primary),
-                        ),
-                        const Divider(
-                          color: Colors.white,
-                        ),
-                        ListTile(
-                          leading: NormalText(
-                              label: 'Requirements/Projects',
-                              fontSize: 12,
-                              color: primary),
-                          trailing: BoldText(
-                              label: total2.toString(),
-                              fontSize: 12,
-                              color: primary),
-                        ),
-                        const Divider(
-                          color: Colors.white,
-                        ),
-                        ListTile(
-                          leading: NormalText(
-                              label: 'Attendance',
-                              fontSize: 12,
-                              color: primary),
-                          trailing: BoldText(
-                              label: total3.toString(),
-                              fontSize: 12,
-                              color: primary),
-                        ),
-                        const Divider(
-                          color: Colors.white,
-                        ),
-                        ListTile(
-                          leading: NormalText(
-                              label: 'Other concerns',
-                              fontSize: 12,
-                              color: primary),
-                          trailing: BoldText(
-                              label: total4.toString(),
-                              fontSize: 12,
-                              color: primary),
-                        ),
-                        const Divider(
-                          color: Colors.white,
-                        ),
+                        StreamBuilder<QuerySnapshot>(
+                            stream: FirebaseFirestore.instance
+                                .collection('Categ')
+                                .snapshots(),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<QuerySnapshot> snapshot) {
+                              if (snapshot.hasError) {
+                                print(snapshot.error);
+                                return const Center(child: Text('Error'));
+                              }
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                print('waiting');
+                                return const Padding(
+                                  padding: EdgeInsets.only(top: 50),
+                                  child: Center(
+                                      child: CircularProgressIndicator(
+                                    color: Colors.black,
+                                  )),
+                                );
+                              }
+
+                              final data1 = snapshot.requireData;
+                              return Expanded(
+                                child: SizedBox(
+                                  child: ListView.separated(
+                                    separatorBuilder: (context, index) {
+                                      return const Divider();
+                                    },
+                                    itemBuilder: (context, index) {
+                                      return StreamBuilder<QuerySnapshot>(
+                                          stream: FirebaseFirestore.instance
+                                              .collection('Concerns')
+                                              .where('concern',
+                                                  isEqualTo: data1.docs[index]
+                                                      ['name'])
+                                              .snapshots(),
+                                          builder: (BuildContext context,
+                                              AsyncSnapshot<QuerySnapshot>
+                                                  snapshot) {
+                                            if (snapshot.hasError) {
+                                              print(snapshot.error);
+                                              return const Center(
+                                                  child: Text('Error'));
+                                            }
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.waiting) {
+                                              print('waiting');
+                                              return const Padding(
+                                                padding:
+                                                    EdgeInsets.only(top: 50),
+                                                child: Center(
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                  color: Colors.black,
+                                                )),
+                                              );
+                                            }
+                                            final data2 = snapshot.requireData;
+                                            return ListTile(
+                                                leading: NormalText(
+                                                    label: data1.docs[index]
+                                                        ['name'],
+                                                    fontSize: 12,
+                                                    color: primary),
+                                                trailing: BoldText(
+                                                    label:
+                                                        data2.size.toString(),
+                                                    fontSize: 12,
+                                                    color: primary));
+                                          });
+                                    },
+                                    itemCount: data1.size,
+                                  ),
+                                ),
+                              );
+                            }),
                       ],
                     ),
                   ),

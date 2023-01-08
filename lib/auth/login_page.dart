@@ -1,12 +1,13 @@
 import 'package:consultation_system/constant/colors.dart';
+import 'package:consultation_system/repositories/auth_repository.dart';
+import 'package:consultation_system/services/navigation.dart';
 import 'package:consultation_system/widgets/text_widget.dart';
+import 'package:consultation_system/widgets/textform_field_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
-import '../repositories/auth_repository.dart';
-import '../services/navigation.dart';
 import '../widgets/error_dialogue_widget.dart';
-import '../widgets/textform_field_widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,6 +23,8 @@ class _LoginPageState extends State<LoginPage> {
 
   final loginformKey = GlobalKey<FormState>();
   bool secureText = true;
+
+  final box = GetStorage();
   @override
   Widget build(BuildContext context) {
     validateLogin(dynamic e) {

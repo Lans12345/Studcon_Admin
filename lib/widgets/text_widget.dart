@@ -32,7 +32,7 @@ class BoldText extends StatelessWidget {
     return Text(
       label,
       style: GoogleFonts.openSans(
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w900,
         textStyle: TextStyle(fontSize: fontSize, color: color),
       ),
     );
