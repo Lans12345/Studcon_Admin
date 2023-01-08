@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consultation_system/constant/colors.dart';
+import 'package:consultation_system/services/navigation.dart';
 import 'package:consultation_system/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
@@ -42,8 +43,8 @@ PreferredSizeWidget appbarWidget(PageController page) {
           return [
             PopupMenuItem(
               onTap: (() async {
-                Navigator.pushReplacementNamed(context, '/loginpage');
-                Navigator.pushReplacementNamed(context, '/loginpage');
+                Navigation(context).goToLoginPage();
+                Navigation(context).goToLoginPage();
               }),
               child: ListTile(
                 leading: const Icon(Icons.logout),
