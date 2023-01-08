@@ -1,6 +1,5 @@
+import 'package:consultation_system/auth/signup_page2.dart';
 import 'package:consultation_system/constant/colors.dart';
-import 'package:consultation_system/repositories/auth_repository.dart';
-import 'package:consultation_system/services/navigation.dart';
 import 'package:consultation_system/widgets/text_widget.dart';
 import 'package:consultation_system/widgets/textform_field_widget.dart';
 import 'package:flutter/material.dart';
@@ -32,24 +31,21 @@ class _SignupPageState extends State<SignupPage> {
 
   late String course = 'IT';
 
+  final _value = false;
+
+  var status = 'on';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffF5F7FB),
       body: Stack(
         children: [
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/background1.jpg'),
-                  fit: BoxFit.cover),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 0, bottom: 0),
+          Card(
             child: Center(
               child: Container(
                 height: 550,
-                width: 400,
+                width: 320,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.grey[100]),
@@ -65,35 +61,153 @@ class _SignupPageState extends State<SignupPage> {
                             const SizedBox(
                               height: 20,
                             ),
-                            BoldText(
-                                label: 'Signup', fontSize: 24, color: primary),
-                            NormalText(
-                                label: 'Create your account',
-                                fontSize: 14,
-                                color: Colors.black),
+                            Center(
+                              child: Container(
+                                  height: 100,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: Colors.green[200]!,
+                                      width: 7.5,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: BoldText(
+                                        label: '1 of 2',
+                                        fontSize: 15,
+                                        color: Colors.black),
+                                  )),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Center(
+                              child: BoldText(
+                                  label: 'Account Registration',
+                                  fontSize: 14,
+                                  color: Colors.black),
+                            ),
+                            Center(
+                              child: NormalText(
+                                  label: 'Provide basic account credentials',
+                                  fontSize: 10,
+                                  color: Colors.grey),
+                            ),
                             const SizedBox(
                               height: 20,
+                            ),
+                            Row(
+                              children: [
+                                NormalText(
+                                    label: '───────────────',
+                                    fontSize: 8,
+                                    color: Colors.black),
+                                NormalText(
+                                    label: 'BUKIDNON STATE UNIVERSITY',
+                                    fontSize: 8,
+                                    color: Colors.black),
+                                NormalText(
+                                    label: '───────────────',
+                                    fontSize: 8,
+                                    color: Colors.black),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            NormalText(
+                                label: 'Email',
+                                fontSize: 12,
+                                color: Colors.black),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            TextformfieldWidget(
+                                prefixIcon: const Icon(Icons.email),
+                                label: 'Email',
+                                textFieldController: _emailController),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            NormalText(
+                                label:
+                                    'Only institutional email address is allowed.\ne.g example@buksu.edu.ph',
+                                fontSize: 9,
+                                color: Colors.black),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            NormalText(
+                                label: 'Password',
+                                fontSize: 12,
+                                color: Colors.black),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            TextformfieldWidget(
+                                prefixIcon: const Icon(Icons.lock),
+                                label: 'Password',
+                                textFieldController: _passwordController),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            NormalText(
+                                label:
+                                    '- Your password can’t be too similar to your other personal information.\n- Your password must contain at least 8 characters.\n- Your password can’t be a commonly used password.\n- Your password can’t be entirely numeric.',
+                                fontSize: 9,
+                                color: Colors.black),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            NormalText(
+                                label: 'First name',
+                                fontSize: 12,
+                                color: Colors.black),
+                            const SizedBox(
+                              height: 5,
                             ),
                             TextformfieldWidget(
                               label: 'First name',
                               textFieldController: _firstNameController,
                             ),
                             const SizedBox(
-                              height: 20,
+                              height: 10,
+                            ),
+                            NormalText(
+                                label: 'Middle name',
+                                fontSize: 12,
+                                color: Colors.black),
+                            const SizedBox(
+                              height: 5,
                             ),
                             TextformfieldWidget(
                               label: 'Middle Name',
                               textFieldController: _middleNameController,
                             ),
                             const SizedBox(
-                              height: 20,
+                              height: 10,
+                            ),
+                            NormalText(
+                                label: 'Surname',
+                                fontSize: 12,
+                                color: Colors.black),
+                            const SizedBox(
+                              height: 5,
                             ),
                             TextformfieldWidget(
                               label: 'Surname',
                               textFieldController: _surNameController,
                             ),
                             const SizedBox(
-                              height: 20,
+                              height: 10,
+                            ),
+                            NormalText(
+                                label: 'Contact number',
+                                fontSize: 12,
+                                color: Colors.black),
+                            const SizedBox(
+                              height: 5,
                             ),
                             TextformfieldWidget(
                               label: 'Contact Number',
@@ -212,76 +326,46 @@ class _SignupPageState extends State<SignupPage> {
                             const SizedBox(
                               height: 20,
                             ),
-                            TextformfieldWidget(
-                                prefixIcon: const Icon(Icons.email),
-                                label: 'Email',
-                                textFieldController: _emailController),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            TextformfieldWidget(
-                                prefixIcon: const Icon(Icons.lock),
-                                label: 'Password',
-                                textFieldController: _passwordController),
-                            const SizedBox(
-                              height: 50,
-                            ),
-                            Center(
+                            Align(
+                              alignment: Alignment.bottomRight,
                               child: MaterialButton(
-                                  minWidth: 300,
+                                  height: 18,
                                   color: primary,
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(100)),
+                                      borderRadius: BorderRadius.circular(10)),
                                   onPressed: (() {
                                     if (signupformKey.currentState!
                                             .validate() &&
                                         _emailController.text
                                             .contains('buksu.edu.ph')) {
-                                      AuthRepository().userSignUp(
-                                          _firstNameController.text,
-                                          _middleNameController.text,
-                                          _surNameController.text,
-                                          _contactNumberController.text,
-                                          _emailController.text,
-                                          _passwordController.text,
-                                          '',
-                                          course);
-                                      Navigation(context).goToLoginPage();
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) => SignupPage2(
+                                                  emailController:
+                                                      _emailController,
+                                                  passwordController:
+                                                      _passwordController,
+                                                  firstNameController:
+                                                      _firstNameController,
+                                                  middleNameController:
+                                                      _middleNameController,
+                                                  surNameController:
+                                                      _surNameController,
+                                                  contactNumberController:
+                                                      _contactNumberController)));
                                     }
-
-                                    // Navigator.of(context).push(MaterialPageRoute(
-                                    //     builder: (context) => LoginPage()));
                                   }),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: NormalText(
-                                        label: 'Signup',
-                                        fontSize: 24,
+                                    padding:
+                                        const EdgeInsets.fromLTRB(15, 5, 15, 5),
+                                    child: BoldText(
+                                        label: 'SUBMIT',
+                                        fontSize: 14,
                                         color: Colors.white),
                                   )),
                             ),
                             const SizedBox(
-                              height: 30,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                NormalText(
-                                    label: 'Already have an account?',
-                                    fontSize: 14,
-                                    color: Colors.grey),
-                                TextButton(
-                                  onPressed: (() {
-                                    // Navigator.of(context).push(MaterialPageRoute(
-                                    //     builder: (context) => LoginPage()));
-                                    Navigation(context).goToLoginPage();
-                                  }),
-                                  child: NormalText(
-                                      label: 'Login now',
-                                      fontSize: 16,
-                                      color: brownAccent),
-                                ),
-                              ],
+                              height: 20,
                             ),
                           ],
                         ),
