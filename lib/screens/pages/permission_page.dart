@@ -4,12 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consultation_system/constant/colors.dart';
 import 'package:consultation_system/widgets/drop_down_button.dart';
 import 'package:consultation_system/widgets/text_widget.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../widgets/appabr_widget.dart';
 
@@ -191,6 +193,14 @@ class _ReportTabState extends State<PermissionPage> {
     }
   }
 
+  void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
+    // TODO: implement your code here
+
+    print(args.value);
+  }
+
+  late String filterDate = 'All';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -269,6 +279,41 @@ class _ReportTabState extends State<PermissionPage> {
                       ),
                     ),
                   ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, right: 120),
+                  child: Container(
+                      width: 150,
+                      decoration: BoxDecoration(
+                        color: greyAccent,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: DateTimePicker(
+                        type: DateTimePickerType.date,
+                        dateMask: 'd MMM, yyyy',
+                        initialValue: DateTime.now().toString(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2100),
+                        icon: Icon(Icons.event),
+                        dateLabelText: 'Date',
+                        timeLabelText: "Hour",
+                        selectableDayPredicate: (date) {
+                          // Disable weekend days to select from the calendar
+                          if (date.weekday == 6 || date.weekday == 7) {}
+
+                          return true;
+                        },
+                        onChanged: (val) {
+                          setState(() {
+                            filterDate = val;
+                          });
+                        },
+                        validator: (val) {
+                          print(val);
+                          return null;
+                        },
+                        onSaved: (val) => print(val),
+                      )),
                 ),
                 const SizedBox(
                   width: 50,
