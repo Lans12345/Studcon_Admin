@@ -202,7 +202,8 @@ class _ReportTabState extends State<PermissionPage> {
           children: [
             Row(
               children: [
-                NormalText(label: 'Permissions', fontSize: 24, color: primary),
+                NormalText(
+                    label: 'Permission List', fontSize: 24, color: primary),
                 const Expanded(child: SizedBox()),
                 const SizedBox(
                   width: 30,
@@ -313,8 +314,6 @@ class _ReportTabState extends State<PermissionPage> {
                               child: Center(
                                 child: Container(
                                   height: 500,
-                                  decoration:
-                                      const BoxDecoration(color: Colors.white),
                                   child: SingleChildScrollView(
                                     child: DataTable(
                                       border: TableBorder.all(
@@ -325,7 +324,7 @@ class _ReportTabState extends State<PermissionPage> {
                                         // column to set the name
                                         DataColumn(
                                             label: NormalText(
-                                                label: 'No.',
+                                                label: 'ID',
                                                 fontSize: 12,
                                                 color: primary)),
                                         DataColumn(
@@ -336,7 +335,7 @@ class _ReportTabState extends State<PermissionPage> {
 
                                         DataColumn(
                                             label: NormalText(
-                                                label: 'Concern',
+                                                label: 'Permissions',
                                                 fontSize: 12,
                                                 color: primary)),
                                         DataColumn(

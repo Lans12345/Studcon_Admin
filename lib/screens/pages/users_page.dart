@@ -259,8 +259,12 @@ class _ReportTabState extends State<UsersPage> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    NormalText(
+                        label: 'Manage Users', fontSize: 24, color: primary),
+                    SizedBox(
+                      width: 30,
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(right: 0),
                       child: MaterialButton(
@@ -770,13 +774,6 @@ class _ReportTabState extends State<UsersPage> {
                               fontSize: 12,
                               color: Colors.white)),
                     ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    NormalText(
-                        label: 'Manage Users', fontSize: 24, color: primary),
-                    const Expanded(child: SizedBox()),
                     const SizedBox(
                       width: 30,
                     ),
@@ -794,7 +791,10 @@ class _ReportTabState extends State<UsersPage> {
                             underline: Container(color: Colors.transparent),
                             iconEnabledColor: Colors.black,
                             isExpanded: true,
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'QRegular',
+                                fontSize: 12),
                             value: _dropdownValue,
                             items: [
                               DropdownMenuItem(
@@ -802,7 +802,7 @@ class _ReportTabState extends State<UsersPage> {
                                   year = 'All';
                                 },
                                 value: 0,
-                                child: DropDownItem(label: 'All'),
+                                child: DropDownItem(label: 'All Year Level'),
                               ),
                               DropdownMenuItem(
                                 onTap: () {
@@ -855,7 +855,7 @@ class _ReportTabState extends State<UsersPage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Container(
-                        width: 300,
+                        width: 250,
                         decoration: BoxDecoration(
                           color: greyAccent,
                           borderRadius: BorderRadius.circular(5),
@@ -875,11 +875,11 @@ class _ReportTabState extends State<UsersPage> {
                                 value: 0,
                                 child: Center(
                                     child: Row(children: const [
-                                  Text("All",
+                                  Text("All Courses",
                                       style: TextStyle(
-                                        fontFamily: 'QRegular',
-                                        color: primary,
-                                      ))
+                                          fontFamily: 'QRegular',
+                                          color: primary,
+                                          fontSize: 12))
                                 ])),
                               ),
                               DropdownMenuItem(
@@ -891,9 +891,9 @@ class _ReportTabState extends State<UsersPage> {
                                     child: Row(children: const [
                                   Text("Automotive",
                                       style: TextStyle(
-                                        fontFamily: 'QRegular',
-                                        color: primary,
-                                      ))
+                                          fontFamily: 'QRegular',
+                                          color: primary,
+                                          fontSize: 12))
                                 ])),
                               ),
                               DropdownMenuItem(
@@ -905,9 +905,9 @@ class _ReportTabState extends State<UsersPage> {
                                     child: Row(children: const [
                                   Text("Food Technology",
                                       style: TextStyle(
-                                        fontFamily: 'QRegular',
-                                        color: primary,
-                                      ))
+                                          fontFamily: 'QRegular',
+                                          color: primary,
+                                          fontSize: 12))
                                 ])),
                               ),
                               DropdownMenuItem(
@@ -919,9 +919,9 @@ class _ReportTabState extends State<UsersPage> {
                                     child: Row(children: const [
                                   Text("Electronic Technology",
                                       style: TextStyle(
-                                        fontFamily: 'QRegular',
-                                        color: primary,
-                                      ))
+                                          fontFamily: 'QRegular',
+                                          color: primary,
+                                          fontSize: 12))
                                 ])),
                               ),
                               DropdownMenuItem(
@@ -935,9 +935,9 @@ class _ReportTabState extends State<UsersPage> {
                                   Text(
                                       "Entertainment and\nMultimedia Computing",
                                       style: TextStyle(
-                                        fontFamily: 'QRegular',
-                                        color: primary,
-                                      ))
+                                          fontFamily: 'QRegular',
+                                          color: primary,
+                                          fontSize: 12))
                                 ])),
                               ),
                               DropdownMenuItem(
@@ -949,9 +949,9 @@ class _ReportTabState extends State<UsersPage> {
                                     child: Row(children: const [
                                   Text("Information Technology",
                                       style: TextStyle(
-                                        fontFamily: 'QRegular',
-                                        color: primary,
-                                      ))
+                                          fontFamily: 'QRegular',
+                                          color: primary,
+                                          fontSize: 12))
                                 ])),
                               ),
                             ],
@@ -1006,8 +1006,7 @@ class _ReportTabState extends State<UsersPage> {
                                 child: year == 'Instructor'
                                     ? Container(
                                         height: 500,
-                                        decoration: const BoxDecoration(
-                                            color: Colors.white),
+                                        decoration: const BoxDecoration(),
                                         child: SingleChildScrollView(
                                           child: DataTable(
                                             border: TableBorder.all(
@@ -1206,8 +1205,7 @@ class _ReportTabState extends State<UsersPage> {
                                       )
                                     : Container(
                                         height: 500,
-                                        decoration: const BoxDecoration(
-                                            color: Colors.white),
+                                        decoration: const BoxDecoration(),
                                         child: SingleChildScrollView(
                                           child: DataTable(
                                             border: TableBorder.all(

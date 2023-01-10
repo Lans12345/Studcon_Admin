@@ -16,7 +16,7 @@ class DropDownItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Row(children: [
-      NormalText(color: primary, fontSize: 12, label: label),
+      NormalText(color: Colors.black, fontSize: 12, label: label),
     ]));
   }
 }
