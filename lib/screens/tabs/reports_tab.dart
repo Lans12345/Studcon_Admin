@@ -179,6 +179,8 @@ class _ReportTabState extends State<ReportTab> {
     await file.writeAsBytes(await doc.save());
   }
 
+  String sort = 'name';
+
   getFilter() {
     if (course == 'All' && year == 'All') {
       return FirebaseFirestore.instance.collection('Concerns').snapshots();
@@ -186,23 +188,29 @@ class _ReportTabState extends State<ReportTab> {
       return FirebaseFirestore.instance
           .collection('Concerns')
           .where('yearLevel', isEqualTo: year)
+          .orderBy(sort)
           .snapshots();
     } else if (year == 'All') {
       return FirebaseFirestore.instance
           .collection('Concerns')
           .where('course', isEqualTo: course)
+          .orderBy(sort)
           .snapshots();
     } else {
       return FirebaseFirestore.instance
           .collection('Concerns')
           .where('yearLevel', isEqualTo: year)
           .where('course', isEqualTo: course)
+          .orderBy(sort)
           .snapshots();
     }
   }
 
+  int _dropdownValue2 = 0;
+
   @override
   Widget build(BuildContext context) {
+    print(sort);
     return Scaffold(
       appBar: appbarWidget(widget.page),
       body: Padding(
@@ -409,6 +417,54 @@ class _ReportTabState extends State<ReportTab> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  width: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Container(
+                    width: 150,
+                    decoration: BoxDecoration(
+                      color: greyAccent,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
+                      child: DropdownButton(
+                        underline: Container(color: Colors.transparent),
+                        iconEnabledColor: Colors.black,
+                        isExpanded: true,
+                        style: const TextStyle(color: Colors.white),
+                        value: _dropdownValue2,
+                        items: [
+                          DropdownMenuItem(
+                            onTap: () {
+                              setState(() {
+                                sort = 'name';
+                              });
+                            },
+                            value: 0,
+                            child: DropDownItem(label: 'Sort by: Names'),
+                          ),
+                          DropdownMenuItem(
+                            onTap: () {
+                              setState(() {
+                                sort = 'dateTime';
+                              });
+                            },
+                            value: 1,
+                            child: DropDownItem(label: 'Sort by: Date'),
+                          ),
+                        ],
+                        onChanged: (value) {
+                          setState(() {
+                            _dropdownValue2 = int.parse(value.toString());
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ),
                 const SizedBox(
                   width: 50,
                 ),
@@ -459,57 +515,64 @@ class _ReportTabState extends State<ReportTab> {
                               child: Center(
                                 child: Container(
                                   height: 500,
-                                  decoration:
-                                      const BoxDecoration(color: Colors.white),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 3, color: Colors.grey[200]!)),
                                   child: SingleChildScrollView(
                                     child: DataTable(
+                                      headingRowColor: MaterialStateProperty
+                                          .resolveWith<Color?>(
+                                              (Set<MaterialState> states) {
+                                        return Colors.blue[400];
+                                        // Use the default value.
+                                      }),
                                       border: TableBorder.all(
-                                        color: Colors.grey,
+                                        color: Colors.white,
                                       ),
                                       // datatable widget
                                       columns: [
                                         // column to set the name
                                         DataColumn(
-                                            label: NormalText(
+                                            label: BoldText(
                                                 label: 'No.',
                                                 fontSize: 12,
-                                                color: primary)),
+                                                color: Colors.white)),
                                         DataColumn(
-                                            label: NormalText(
+                                            label: BoldText(
                                                 label: 'Student\nName',
-                                                fontSize: 12,
-                                                color: primary)),
+                                                fontSize: 14,
+                                                color: Colors.white)),
                                         DataColumn(
-                                            label: NormalText(
+                                            label: BoldText(
                                                 label: 'Time of\nConsultation',
-                                                fontSize: 12,
-                                                color: primary)),
+                                                fontSize: 14,
+                                                color: Colors.white)),
                                         DataColumn(
-                                            label: NormalText(
+                                            label: BoldText(
                                                 label: 'Date of\nConsultation',
-                                                fontSize: 12,
-                                                color: primary)),
+                                                fontSize: 14,
+                                                color: Colors.white)),
                                         DataColumn(
-                                            label: NormalText(
+                                            label: BoldText(
                                                 label: 'Course',
-                                                fontSize: 12,
-                                                color: primary)),
+                                                fontSize: 14,
+                                                color: Colors.white)),
                                         DataColumn(
-                                            label: NormalText(
+                                            label: BoldText(
                                                 label: 'Year\nLevel',
-                                                fontSize: 12,
-                                                color: primary)),
+                                                fontSize: 14,
+                                                color: Colors.white)),
                                         DataColumn(
-                                            label: NormalText(
+                                            label: BoldText(
                                                 label:
                                                     'Purpose of\nConsultation',
-                                                fontSize: 12,
-                                                color: primary)),
+                                                fontSize: 14,
+                                                color: Colors.white)),
                                         DataColumn(
-                                            label: NormalText(
+                                            label: BoldText(
                                                 label: 'Ticket\nStatus',
-                                                fontSize: 12,
-                                                color: primary)),
+                                                fontSize: 14,
+                                                color: Colors.white)),
                                       ],
 
                                       rows: [
@@ -523,9 +586,10 @@ class _ReportTabState extends State<ReportTab> {
                                                       (Set<MaterialState>
                                                           states) {
                                                 if (i.floor().isEven) {
-                                                  return Colors.blueGrey[50];
+                                                  return Colors.blueGrey[100];
+                                                } else {
+                                                  return Colors.grey[200];
                                                 }
-                                                return null; // Use the default value.
                                               }),
                                               cells: [
                                                 DataCell(

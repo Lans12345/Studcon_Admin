@@ -270,7 +270,7 @@ class _ReportTabState extends State<UsersPage> {
                       child: MaterialButton(
                           height: 40,
                           minWidth: 120,
-                          color: Colors.green,
+                          color: primary,
                           onPressed: (() {
                             showDialog(
                                 context: context,
@@ -540,7 +540,7 @@ class _ReportTabState extends State<UsersPage> {
                       child: MaterialButton(
                           height: 40,
                           minWidth: 120,
-                          color: Colors.green,
+                          color: primary,
                           onPressed: (() {
                             showDialog(
                                 context: context,
@@ -1006,37 +1006,48 @@ class _ReportTabState extends State<UsersPage> {
                                 child: year == 'Instructor'
                                     ? Container(
                                         height: 500,
-                                        decoration: const BoxDecoration(),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                width: 3,
+                                                color: Colors.grey[200]!)),
                                         child: SingleChildScrollView(
                                           child: DataTable(
+                                            headingRowColor:
+                                                MaterialStateProperty
+                                                    .resolveWith<Color?>(
+                                                        (Set<MaterialState>
+                                                            states) {
+                                              return Colors.blue[400];
+                                              // Use the default value.
+                                            }),
                                             border: TableBorder.all(
-                                              color: Colors.grey,
+                                              color: Colors.white,
                                             ),
                                             // datatable widget
                                             columns: [
                                               // column to set the name
                                               DataColumn(
-                                                  label: NormalText(
+                                                  label: BoldText(
                                                       label: 'No.',
-                                                      fontSize: 12,
-                                                      color: primary)),
+                                                      fontSize: 14,
+                                                      color: Colors.white)),
                                               DataColumn(
-                                                  label: NormalText(
+                                                  label: BoldText(
                                                       label: 'Instructor Name',
-                                                      fontSize: 12,
-                                                      color: primary)),
+                                                      fontSize: 14,
+                                                      color: Colors.white)),
 
                                               DataColumn(
-                                                  label: NormalText(
+                                                  label: BoldText(
                                                       label: 'Department',
-                                                      fontSize: 12,
-                                                      color: primary)),
+                                                      fontSize: 14,
+                                                      color: Colors.white)),
 
                                               DataColumn(
-                                                  label: NormalText(
+                                                  label: BoldText(
                                                       label: '',
-                                                      fontSize: 12,
-                                                      color: primary)),
+                                                      fontSize: 14,
+                                                      color: Colors.white)),
                                             ],
 
                                             rows: [
@@ -1051,9 +1062,10 @@ class _ReportTabState extends State<UsersPage> {
                                                                 states) {
                                                       if (i.floor().isEven) {
                                                         return Colors
-                                                            .blueGrey[50];
+                                                            .blueGrey[100];
+                                                      } else {
+                                                        return Colors.grey[200];
                                                       }
-                                                      return null; // Use the default value.
                                                     }),
                                                     cells: [
                                                       DataCell(
@@ -1205,42 +1217,53 @@ class _ReportTabState extends State<UsersPage> {
                                       )
                                     : Container(
                                         height: 500,
-                                        decoration: const BoxDecoration(),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                width: 3,
+                                                color: Colors.grey[200]!)),
                                         child: SingleChildScrollView(
                                           child: DataTable(
+                                            headingRowColor:
+                                                MaterialStateProperty
+                                                    .resolveWith<Color?>(
+                                                        (Set<MaterialState>
+                                                            states) {
+                                              return Colors.blue[400];
+                                              // Use the default value.
+                                            }),
                                             border: TableBorder.all(
-                                              color: Colors.grey,
+                                              color: Colors.white,
                                             ),
                                             // datatable widget
                                             columns: [
                                               // column to set the name
                                               DataColumn(
-                                                  label: NormalText(
+                                                  label: BoldText(
                                                       label: 'No.',
-                                                      fontSize: 12,
-                                                      color: primary)),
+                                                      fontSize: 14,
+                                                      color: Colors.white)),
                                               DataColumn(
-                                                  label: NormalText(
+                                                  label: BoldText(
                                                       label: 'Student Name',
-                                                      fontSize: 12,
-                                                      color: primary)),
+                                                      fontSize: 14,
+                                                      color: Colors.white)),
 
                                               DataColumn(
-                                                  label: NormalText(
+                                                  label: BoldText(
                                                       label: 'Course',
-                                                      fontSize: 12,
-                                                      color: primary)),
+                                                      fontSize: 14,
+                                                      color: Colors.white)),
                                               DataColumn(
-                                                  label: NormalText(
+                                                  label: BoldText(
                                                       label: 'Year Level',
-                                                      fontSize: 12,
-                                                      color: primary)),
+                                                      fontSize: 14,
+                                                      color: Colors.white)),
 
                                               DataColumn(
-                                                  label: NormalText(
+                                                  label: BoldText(
                                                       label: '',
-                                                      fontSize: 12,
-                                                      color: primary)),
+                                                      fontSize: 14,
+                                                      color: Colors.white)),
                                             ],
 
                                             rows: [
@@ -1255,9 +1278,10 @@ class _ReportTabState extends State<UsersPage> {
                                                                 states) {
                                                       if (i.floor().isEven) {
                                                         return Colors
-                                                            .blueGrey[50];
+                                                            .blueGrey[100];
+                                                      } else {
+                                                        return Colors.grey[200];
                                                       }
-                                                      return null; // Use the default value.
                                                     }),
                                                     cells: [
                                                       DataCell(

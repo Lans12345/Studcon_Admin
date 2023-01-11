@@ -58,6 +58,7 @@ dependencies:
   get_storage:
   syncfusion_flutter_datepicker: ^20.4.43
   date_time_picker: ^2.1.0
+  flutter_datetime_picker: ^1.5.1
 
 
 dev_dependencies:
