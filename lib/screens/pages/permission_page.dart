@@ -195,123 +195,124 @@ class _ReportTabState extends State<PermissionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appbarWidget(widget.page),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, top: 20, bottom: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                NormalText(
-                    label: 'Permission List', fontSize: 24, color: primary),
-                const Expanded(child: SizedBox()),
-                const SizedBox(
-                  width: 30,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, right: 120),
-                  child: Container(
-                    width: 150,
-                    decoration: BoxDecoration(
-                      color: greyAccent,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
-                      child: DropdownButton(
-                        underline: Container(color: Colors.transparent),
-                        iconEnabledColor: Colors.black,
-                        isExpanded: true,
-                        style: const TextStyle(color: Colors.white),
-                        value: _dropdownValue,
-                        items: [
-                          DropdownMenuItem(
-                            onTap: () {
-                              year = 'All';
-                            },
-                            value: 0,
-                            child: DropDownItem(label: 'All'),
-                          ),
-                          DropdownMenuItem(
-                            onTap: () {
-                              year = 'Attendance';
-                            },
-                            value: 1,
-                            child: DropDownItem(label: 'Attendance'),
-                          ),
-                          DropdownMenuItem(
-                            onTap: () {
-                              year = 'Grades';
-                            },
-                            value: 2,
-                            child: DropDownItem(label: 'Grades'),
-                          ),
-                          DropdownMenuItem(
-                            onTap: () {
-                              year = 'Requirements';
-                            },
-                            value: 3,
-                            child: DropDownItem(label: 'Requirements'),
-                          ),
-                          DropdownMenuItem(
-                            onTap: () {
-                              year = 'Others';
-                            },
-                            value: 4,
-                            child: DropDownItem(label: 'Others'),
-                          ),
-                        ],
-                        onChanged: (value) {
-                          setState(() {
-                            _dropdownValue = int.parse(value.toString());
-                          });
-                        },
+      body: Container(
+        color: greyAccent,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, top: 20, bottom: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  NormalText(
+                      label: 'Permission List', fontSize: 24, color: primary),
+                  const Expanded(child: SizedBox()),
+                  const SizedBox(
+                    width: 30,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, right: 200),
+                    child: Container(
+                      width: 150,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
+                        child: DropdownButton(
+                          underline: Container(color: Colors.transparent),
+                          iconEnabledColor: Colors.black,
+                          isExpanded: true,
+                          style: const TextStyle(color: Colors.white),
+                          value: _dropdownValue,
+                          items: [
+                            DropdownMenuItem(
+                              onTap: () {
+                                year = 'All';
+                              },
+                              value: 0,
+                              child: DropDownItem(label: 'All'),
+                            ),
+                            DropdownMenuItem(
+                              onTap: () {
+                                year = 'Attendance';
+                              },
+                              value: 1,
+                              child: DropDownItem(label: 'Attendance'),
+                            ),
+                            DropdownMenuItem(
+                              onTap: () {
+                                year = 'Grades';
+                              },
+                              value: 2,
+                              child: DropDownItem(label: 'Grades'),
+                            ),
+                            DropdownMenuItem(
+                              onTap: () {
+                                year = 'Requirements';
+                              },
+                              value: 3,
+                              child: DropDownItem(label: 'Requirements'),
+                            ),
+                            DropdownMenuItem(
+                              onTap: () {
+                                year = 'Others';
+                              },
+                              value: 4,
+                              child: DropDownItem(label: 'Others'),
+                            ),
+                          ],
+                          onChanged: (value) {
+                            setState(() {
+                              _dropdownValue = int.parse(value.toString());
+                            });
+                          },
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  width: 50,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            StreamBuilder<QuerySnapshot>(
-                stream: getFilter(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (snapshot.hasError) {
-                    print(snapshot.error);
-                    return const Center(child: Text('Error'));
-                  }
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    print('waiting');
-                    return const Padding(
-                      padding: EdgeInsets.only(top: 50),
-                      child: Center(
-                          child: CircularProgressIndicator(
-                        color: Colors.black,
-                      )),
-                    );
-                  }
+                  const SizedBox(
+                    width: 50,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              StreamBuilder<QuerySnapshot>(
+                  stream: getFilter(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      print(snapshot.error);
+                      return const Center(child: Text('Error'));
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      print('waiting');
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 50),
+                        child: Center(
+                            child: CircularProgressIndicator(
+                          color: Colors.black,
+                        )),
+                      );
+                    }
 
-                  final data = snapshot.requireData;
+                    final data = snapshot.requireData;
 
-                  return Expanded(
-                    child: SizedBox(
-                      child: ListView.builder(
-                          itemCount: 1,
-                          itemBuilder: ((context, index) {
-                            DateTime created =
-                                data.docs[index]['dateTime'].toDate();
+                    return Expanded(
+                      child: SizedBox(
+                        child: ListView.builder(
+                            itemCount: 1,
+                            itemBuilder: ((context, index) {
+                              DateTime created =
+                                  data.docs[index]['dateTime'].toDate();
 
-                            String formattedTime =
-                                DateFormat.yMMMd().add_jm().format(created);
-                            return Padding(
-                              padding: const EdgeInsets.only(right: 25),
-                              child: Center(
+                              String formattedTime =
+                                  DateFormat.yMMMd().add_jm().format(created);
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 25),
                                 child: Container(
                                   decoration: BoxDecoration(
                                       border: Border.all(
@@ -468,13 +469,13 @@ class _ReportTabState extends State<PermissionPage> {
                                     ),
                                   ),
                                 ),
-                              ),
-                            );
-                          })),
-                    ),
-                  );
-                })
-          ],
+                              );
+                            })),
+                      ),
+                    );
+                  })
+            ],
+          ),
         ),
       ),
     );

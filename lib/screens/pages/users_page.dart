@@ -250,759 +250,771 @@ class _ReportTabState extends State<UsersPage> {
     print(course);
     return Scaffold(
       appBar: appbarWidget(widget.page),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, top: 20, bottom: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Row(
-                  children: [
-                    NormalText(
-                        label: 'Manage Users', fontSize: 24, color: primary),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 0),
-                      child: MaterialButton(
-                          height: 40,
-                          minWidth: 120,
-                          color: primary,
-                          onPressed: (() {
-                            showDialog(
-                                context: context,
-                                builder: ((context) {
-                                  return Dialog(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 0, bottom: 0),
-                                      child: Container(
-                                        height: 550,
-                                        width: 400,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            color: Colors.grey[100]),
-                                        child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              30, 10, 30, 10),
-                                          child: SingleChildScrollView(
-                                            child: Form(
-                                              key: signupformKey,
-                                              child: Center(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        BoldText(
-                                                            label:
-                                                                'Registration',
-                                                            fontSize: 18,
-                                                            color: primary),
-                                                        IconButton(
-                                                            onPressed: (() {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            }),
-                                                            icon: const Icon(
-                                                              Icons.close,
-                                                              color: Colors.red,
-                                                            ))
-                                                      ],
-                                                    ),
-                                                    NormalText(
-                                                        label:
-                                                            'Create student account',
-                                                        fontSize: 14,
-                                                        color: Colors.black),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                      label: 'First name',
-                                                      textFieldController:
-                                                          _firstNameController,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                      label: 'Middle Name',
-                                                      textFieldController:
-                                                          _middleNameController,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                      label: 'Surname',
-                                                      textFieldController:
-                                                          _surNameController,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                      label: 'Contact Number',
-                                                      textFieldController:
-                                                          _contactNumberController,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                      label: 'Address',
-                                                      textFieldController:
-                                                          addressController,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                      label: 'Course',
-                                                      textFieldController:
-                                                          courseController,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                      label: 'Year Level',
-                                                      textFieldController:
-                                                          yearController,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                        isForStudentReg: true,
-                                                        prefixIcon: const Icon(
-                                                            Icons.email),
-                                                        label: 'Email',
+      body: Container(
+        color: greyAccent,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, top: 20, bottom: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  NormalText(
+                      label: 'Manage Users', fontSize: 24, color: primary),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 0),
+                        child: MaterialButton(
+                            height: 40,
+                            minWidth: 120,
+                            color: primary,
+                            onPressed: (() {
+                              showDialog(
+                                  context: context,
+                                  builder: ((context) {
+                                    return Dialog(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            right: 0, bottom: 0),
+                                        child: Container(
+                                          height: 550,
+                                          width: 400,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color: Colors.grey[100]),
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                30, 10, 30, 10),
+                                            child: SingleChildScrollView(
+                                              child: Form(
+                                                key: signupformKey,
+                                                child: Center(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          BoldText(
+                                                              label:
+                                                                  'Registration',
+                                                              fontSize: 18,
+                                                              color: primary),
+                                                          IconButton(
+                                                              onPressed: (() {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              }),
+                                                              icon: const Icon(
+                                                                Icons.close,
+                                                                color:
+                                                                    Colors.red,
+                                                              ))
+                                                        ],
+                                                      ),
+                                                      NormalText(
+                                                          label:
+                                                              'Create student account',
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                        label: 'First name',
                                                         textFieldController:
-                                                            _emailController),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                        prefixIcon: const Icon(
-                                                            Icons.lock),
-                                                        label: 'Password',
+                                                            _firstNameController,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                        label: 'Middle Name',
                                                         textFieldController:
-                                                            _passwordController),
-                                                    const SizedBox(
-                                                      height: 50,
-                                                    ),
-                                                    Center(
-                                                      child: MaterialButton(
-                                                          minWidth: 300,
-                                                          color: primary,
-                                                          shape: RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          100)),
-                                                          onPressed: (() async {
-                                                            if (signupformKey
-                                                                    .currentState!
-                                                                    .validate() &&
+                                                            _middleNameController,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                        label: 'Surname',
+                                                        textFieldController:
+                                                            _surNameController,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                        label: 'Contact Number',
+                                                        textFieldController:
+                                                            _contactNumberController,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                        label: 'Address',
+                                                        textFieldController:
+                                                            addressController,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                        label: 'Course',
+                                                        textFieldController:
+                                                            courseController,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                        label: 'Year Level',
+                                                        textFieldController:
+                                                            yearController,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                          isForStudentReg: true,
+                                                          prefixIcon:
+                                                              const Icon(
+                                                                  Icons.email),
+                                                          label: 'Email',
+                                                          textFieldController:
+                                                              _emailController),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                          prefixIcon:
+                                                              const Icon(
+                                                                  Icons.lock),
+                                                          label: 'Password',
+                                                          textFieldController:
+                                                              _passwordController),
+                                                      const SizedBox(
+                                                        height: 50,
+                                                      ),
+                                                      Center(
+                                                        child: MaterialButton(
+                                                            minWidth: 300,
+                                                            color: primary,
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            100)),
+                                                            onPressed:
+                                                                (() async {
+                                                              if (signupformKey
+                                                                      .currentState!
+                                                                      .validate() &&
+                                                                  _emailController
+                                                                      .text
+                                                                      .contains(
+                                                                          'student.buksu.edu.ph')) {
+                                                                // AuthRepository().userSignUp(
+                                                                //     _firstNameController
+                                                                //         .text,
+                                                                //     _middleNameController
+                                                                //         .text,
+                                                                //     _surNameController
+                                                                //         .text,
+                                                                //     _contactNumberController
+                                                                //         .text,
+                                                                //     _emailController
+                                                                //         .text,
+                                                                //     _passwordController
+                                                                //         .text,
+                                                                //     '',
+                                                                //     course);
+
+                                                                await FirebaseAuth
+                                                                    .instance
+                                                                    .createUserWithEmailAndPassword(
+                                                                        email: _emailController
+                                                                            .text
+                                                                            .trim(),
+                                                                        password: _passwordController
+                                                                            .text
+                                                                            .trim())
+                                                                    .then(
+                                                                        (value) async {
+                                                                  addUser(
+                                                                      '${_firstNameController.text} ${_surNameController.text}',
+                                                                      _contactNumberController
+                                                                          .text,
+                                                                      addressController
+                                                                          .text,
+                                                                      courseController
+                                                                          .text,
+                                                                      yearController
+                                                                          .text,
+                                                                      _emailController
+                                                                          .text,
+                                                                      value
+                                                                          .user!
+                                                                          .uid);
+                                                                });
+
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                                _firstNameController
+                                                                    .clear();
+                                                                _middleNameController
+                                                                    .clear();
+                                                                _surNameController
+                                                                    .clear();
+                                                                addressController
+                                                                    .clear();
+                                                                _contactNumberController
+                                                                    .clear();
                                                                 _emailController
-                                                                    .text
-                                                                    .contains(
-                                                                        'student.buksu.edu.ph')) {
-                                                              // AuthRepository().userSignUp(
-                                                              //     _firstNameController
-                                                              //         .text,
-                                                              //     _middleNameController
-                                                              //         .text,
-                                                              //     _surNameController
-                                                              //         .text,
-                                                              //     _contactNumberController
-                                                              //         .text,
-                                                              //     _emailController
-                                                              //         .text,
-                                                              //     _passwordController
-                                                              //         .text,
-                                                              //     '',
-                                                              //     course);
-
-                                                              await FirebaseAuth
-                                                                  .instance
-                                                                  .createUserWithEmailAndPassword(
-                                                                      email: _emailController
-                                                                          .text
-                                                                          .trim(),
-                                                                      password: _passwordController
-                                                                          .text
-                                                                          .trim())
-                                                                  .then(
-                                                                      (value) async {
-                                                                addUser(
-                                                                    '${_firstNameController.text} ${_surNameController.text}',
-                                                                    _contactNumberController
-                                                                        .text,
-                                                                    addressController
-                                                                        .text,
-                                                                    courseController
-                                                                        .text,
-                                                                    yearController
-                                                                        .text,
-                                                                    _emailController
-                                                                        .text,
-                                                                    value.user!
-                                                                        .uid);
-                                                              });
-
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                              _firstNameController
-                                                                  .clear();
-                                                              _middleNameController
-                                                                  .clear();
-                                                              _surNameController
-                                                                  .clear();
-                                                              addressController
-                                                                  .clear();
-                                                              _contactNumberController
-                                                                  .clear();
-                                                              _emailController
-                                                                  .clear();
-                                                              _passwordController
-                                                                  .clear();
-                                                              courseController
-                                                                  .clear();
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .showSnackBar(
-                                                                const SnackBar(
-                                                                  duration:
-                                                                      Duration(
-                                                                          seconds:
-                                                                              5),
-                                                                  content: Text(
-                                                                      'Student Registered Succesfully!'),
-                                                                ),
-                                                              );
-                                                            }
-
-                                                            // Navigator.of(context).push(MaterialPageRoute(
-                                                            //     builder: (context) => LoginPage()));
-                                                          }),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: NormalText(
-                                                                label:
-                                                                    'Register Student',
-                                                                fontSize: 24,
-                                                                color: Colors
-                                                                    .white),
-                                                          )),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 30,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }));
-                          }),
-                          child: NormalText(
-                              label: 'Add Student',
-                              fontSize: 12,
-                              color: Colors.white)),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 50),
-                      child: MaterialButton(
-                          height: 40,
-                          minWidth: 120,
-                          color: primary,
-                          onPressed: (() {
-                            showDialog(
-                                context: context,
-                                builder: ((context) {
-                                  return Dialog(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 0, bottom: 0),
-                                      child: Container(
-                                        height: 550,
-                                        width: 400,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            color: Colors.grey[100]),
-                                        child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              30, 10, 30, 10),
-                                          child: SingleChildScrollView(
-                                            child: Form(
-                                              key: signupformKey,
-                                              child: Center(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        BoldText(
-                                                            label:
-                                                                'Registration',
-                                                            fontSize: 18,
-                                                            color: primary),
-                                                        IconButton(
-                                                            onPressed: (() {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            }),
-                                                            icon: const Icon(
-                                                              Icons.close,
-                                                              color: Colors.red,
-                                                            ))
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    NormalText(
-                                                        label:
-                                                            'Create instructor account',
-                                                        fontSize: 14,
-                                                        color: Colors.black),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                      label: 'First name',
-                                                      textFieldController:
-                                                          _firstNameController,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                      label: 'Middle Name',
-                                                      textFieldController:
-                                                          _middleNameController,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                      label: 'Surname',
-                                                      textFieldController:
-                                                          _surNameController,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                      label: 'Contact Number',
-                                                      textFieldController:
-                                                          _contactNumberController,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                      label: 'Department',
-                                                      textFieldController:
-                                                          courseController,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                        isForStudentReg: false,
-                                                        prefixIcon: const Icon(
-                                                            Icons.email),
-                                                        label: 'Email',
-                                                        textFieldController:
-                                                            _emailController),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextformfieldWidget(
-                                                        prefixIcon: const Icon(
-                                                            Icons.lock),
-                                                        label: 'Password',
-                                                        textFieldController:
-                                                            _passwordController),
-                                                    const SizedBox(
-                                                      height: 50,
-                                                    ),
-                                                    Center(
-                                                      child: MaterialButton(
-                                                          minWidth: 300,
-                                                          color: primary,
-                                                          shape: RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          100)),
-                                                          onPressed: (() async {
-                                                            if (signupformKey
-                                                                    .currentState!
-                                                                    .validate() &&
-                                                                _emailController
-                                                                    .text
-                                                                    .contains(
-                                                                        'buksu.edu.ph')) {
-                                                              await FirebaseAuth
-                                                                  .instance
-                                                                  .createUserWithEmailAndPassword(
-                                                                      email: _emailController
-                                                                          .text
-                                                                          .trim(),
-                                                                      password: _passwordController
-                                                                          .text
-                                                                          .trim())
-                                                                  .then(
-                                                                      (value) async {
-                                                                UserRepository().addUser(
-                                                                    _firstNameController
-                                                                        .text,
-                                                                    _middleNameController
-                                                                        .text,
-                                                                    _surNameController
-                                                                        .text,
-                                                                    _contactNumberController
-                                                                        .text,
-                                                                    _emailController
-                                                                        .text,
-                                                                    _passwordController
-                                                                        .text,
-                                                                    value.user!
-                                                                        .uid,
-                                                                    courseController
-                                                                        .text);
-                                                              });
-
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                              _firstNameController
-                                                                  .clear();
-                                                              _middleNameController
-                                                                  .clear();
-                                                              _surNameController
-                                                                  .clear();
-                                                              _contactNumberController
-                                                                  .clear();
-                                                              _emailController
-                                                                  .clear();
-                                                              _passwordController
-                                                                  .clear();
-                                                              courseController
-                                                                  .clear();
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .showSnackBar(
-                                                                const SnackBar(
-                                                                  duration:
-                                                                      Duration(
-                                                                          seconds:
-                                                                              5),
-                                                                  content: Text(
-                                                                      'Instructor Registered Succesfully!'),
-                                                                ),
-                                                              );
+                                                                    .clear();
+                                                                _passwordController
+                                                                    .clear();
+                                                                courseController
+                                                                    .clear();
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  const SnackBar(
+                                                                    duration: Duration(
+                                                                        seconds:
+                                                                            5),
+                                                                    content: Text(
+                                                                        'Student Registered Succesfully!'),
+                                                                  ),
+                                                                );
+                                                              }
 
                                                               // Navigator.of(context).push(MaterialPageRoute(
                                                               //     builder: (context) => LoginPage()));
-                                                            }
-                                                          }),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: NormalText(
-                                                                label:
-                                                                    'Register Instructor',
-                                                                fontSize: 24,
-                                                                color: Colors
-                                                                    .white),
-                                                          )),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 30,
-                                                    ),
-                                                  ],
+                                                            }),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: NormalText(
+                                                                  label:
+                                                                      'Register Student',
+                                                                  fontSize: 24,
+                                                                  color: Colors
+                                                                      .white),
+                                                            )),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 30,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                }));
-                          }),
-                          child: NormalText(
-                              label: 'Add Instructor',
-                              fontSize: 12,
-                              color: Colors.white)),
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Container(
-                        width: 150,
-                        decoration: BoxDecoration(
-                          color: greyAccent,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
-                          child: DropdownButton(
-                            underline: Container(color: Colors.transparent),
-                            iconEnabledColor: Colors.black,
-                            isExpanded: true,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'QRegular',
-                                fontSize: 12),
-                            value: _dropdownValue,
-                            items: [
-                              DropdownMenuItem(
-                                onTap: () {
-                                  year = 'All';
-                                },
-                                value: 0,
-                                child: DropDownItem(label: 'All Year Level'),
-                              ),
-                              DropdownMenuItem(
-                                onTap: () {
-                                  year = 'First Year';
-                                },
-                                value: 1,
-                                child: DropDownItem(label: '1st Year'),
-                              ),
-                              DropdownMenuItem(
-                                onTap: () {
-                                  year = 'Second Year';
-                                },
-                                value: 2,
-                                child: DropDownItem(label: '2nd Year'),
-                              ),
-                              DropdownMenuItem(
-                                onTap: () {
-                                  year = 'Third Year';
-                                },
-                                value: 3,
-                                child: DropDownItem(label: '3rd Year'),
-                              ),
-                              DropdownMenuItem(
-                                onTap: () {
-                                  year = 'Fourth Year';
-                                },
-                                value: 4,
-                                child: DropDownItem(label: '4th Year'),
-                              ),
-                              DropdownMenuItem(
-                                onTap: () {
-                                  year = 'Instructor';
-                                },
-                                value: 5,
-                                child: DropDownItem(label: 'Instructors'),
-                              ),
-                            ],
-                            onChanged: (value) {
-                              setState(() {
-                                _dropdownValue = int.parse(value.toString());
-                              });
-                            },
+                                    );
+                                  }));
+                            }),
+                            child: NormalText(
+                                label: 'Add Student',
+                                fontSize: 12,
+                                color: Colors.white)),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 50),
+                        child: MaterialButton(
+                            height: 40,
+                            minWidth: 120,
+                            color: primary,
+                            onPressed: (() {
+                              showDialog(
+                                  context: context,
+                                  builder: ((context) {
+                                    return Dialog(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            right: 0, bottom: 0),
+                                        child: Container(
+                                          height: 550,
+                                          width: 400,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color: Colors.grey[100]),
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                30, 10, 30, 10),
+                                            child: SingleChildScrollView(
+                                              child: Form(
+                                                key: signupformKey,
+                                                child: Center(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          BoldText(
+                                                              label:
+                                                                  'Registration',
+                                                              fontSize: 18,
+                                                              color: primary),
+                                                          IconButton(
+                                                              onPressed: (() {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              }),
+                                                              icon: const Icon(
+                                                                Icons.close,
+                                                                color:
+                                                                    Colors.red,
+                                                              ))
+                                                        ],
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      NormalText(
+                                                          label:
+                                                              'Create instructor account',
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                        label: 'First name',
+                                                        textFieldController:
+                                                            _firstNameController,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                        label: 'Middle Name',
+                                                        textFieldController:
+                                                            _middleNameController,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                        label: 'Surname',
+                                                        textFieldController:
+                                                            _surNameController,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                        label: 'Contact Number',
+                                                        textFieldController:
+                                                            _contactNumberController,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                        label: 'Department',
+                                                        textFieldController:
+                                                            courseController,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                          isForStudentReg:
+                                                              false,
+                                                          prefixIcon:
+                                                              const Icon(
+                                                                  Icons.email),
+                                                          label: 'Email',
+                                                          textFieldController:
+                                                              _emailController),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      TextformfieldWidget(
+                                                          prefixIcon:
+                                                              const Icon(
+                                                                  Icons.lock),
+                                                          label: 'Password',
+                                                          textFieldController:
+                                                              _passwordController),
+                                                      const SizedBox(
+                                                        height: 50,
+                                                      ),
+                                                      Center(
+                                                        child: MaterialButton(
+                                                            minWidth: 300,
+                                                            color: primary,
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            100)),
+                                                            onPressed:
+                                                                (() async {
+                                                              if (signupformKey
+                                                                      .currentState!
+                                                                      .validate() &&
+                                                                  _emailController
+                                                                      .text
+                                                                      .contains(
+                                                                          'buksu.edu.ph')) {
+                                                                await FirebaseAuth
+                                                                    .instance
+                                                                    .createUserWithEmailAndPassword(
+                                                                        email: _emailController
+                                                                            .text
+                                                                            .trim(),
+                                                                        password: _passwordController
+                                                                            .text
+                                                                            .trim())
+                                                                    .then(
+                                                                        (value) async {
+                                                                  UserRepository().addUser(
+                                                                      _firstNameController
+                                                                          .text,
+                                                                      _middleNameController
+                                                                          .text,
+                                                                      _surNameController
+                                                                          .text,
+                                                                      _contactNumberController
+                                                                          .text,
+                                                                      _emailController
+                                                                          .text,
+                                                                      _passwordController
+                                                                          .text,
+                                                                      value
+                                                                          .user!
+                                                                          .uid,
+                                                                      courseController
+                                                                          .text);
+                                                                });
+
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                                _firstNameController
+                                                                    .clear();
+                                                                _middleNameController
+                                                                    .clear();
+                                                                _surNameController
+                                                                    .clear();
+                                                                _contactNumberController
+                                                                    .clear();
+                                                                _emailController
+                                                                    .clear();
+                                                                _passwordController
+                                                                    .clear();
+                                                                courseController
+                                                                    .clear();
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  const SnackBar(
+                                                                    duration: Duration(
+                                                                        seconds:
+                                                                            5),
+                                                                    content: Text(
+                                                                        'Instructor Registered Succesfully!'),
+                                                                  ),
+                                                                );
+
+                                                                // Navigator.of(context).push(MaterialPageRoute(
+                                                                //     builder: (context) => LoginPage()));
+                                                              }
+                                                            }),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: NormalText(
+                                                                  label:
+                                                                      'Register Instructor',
+                                                                  fontSize: 24,
+                                                                  color: Colors
+                                                                      .white),
+                                                            )),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 30,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }));
+                            }),
+                            child: NormalText(
+                                label: 'Add Instructor',
+                                fontSize: 12,
+                                color: Colors.white)),
+                      ),
+                      const SizedBox(
+                        width: 30,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Container(
+                          width: 150,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
+                            child: DropdownButton(
+                              underline: Container(color: Colors.transparent),
+                              iconEnabledColor: Colors.black,
+                              isExpanded: true,
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'QRegular',
+                                  fontSize: 12),
+                              value: _dropdownValue,
+                              items: [
+                                DropdownMenuItem(
+                                  onTap: () {
+                                    year = 'All';
+                                  },
+                                  value: 0,
+                                  child: DropDownItem(label: 'All Year Level'),
+                                ),
+                                DropdownMenuItem(
+                                  onTap: () {
+                                    year = 'First Year';
+                                  },
+                                  value: 1,
+                                  child: DropDownItem(label: '1st Year'),
+                                ),
+                                DropdownMenuItem(
+                                  onTap: () {
+                                    year = 'Second Year';
+                                  },
+                                  value: 2,
+                                  child: DropDownItem(label: '2nd Year'),
+                                ),
+                                DropdownMenuItem(
+                                  onTap: () {
+                                    year = 'Third Year';
+                                  },
+                                  value: 3,
+                                  child: DropDownItem(label: '3rd Year'),
+                                ),
+                                DropdownMenuItem(
+                                  onTap: () {
+                                    year = 'Fourth Year';
+                                  },
+                                  value: 4,
+                                  child: DropDownItem(label: '4th Year'),
+                                ),
+                                DropdownMenuItem(
+                                  onTap: () {
+                                    year = 'Instructor';
+                                  },
+                                  value: 5,
+                                  child: DropDownItem(label: 'Instructors'),
+                                ),
+                              ],
+                              onChanged: (value) {
+                                setState(() {
+                                  _dropdownValue = int.parse(value.toString());
+                                });
+                              },
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Container(
-                        width: 250,
-                        decoration: BoxDecoration(
-                          color: greyAccent,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
-                          child: DropdownButton(
-                            underline: Container(color: Colors.transparent),
-                            iconEnabledColor: Colors.black,
-                            isExpanded: true,
-                            value: _dropdownValue1,
-                            items: [
-                              DropdownMenuItem(
-                                onTap: () {
-                                  course = "All";
-                                },
-                                value: 0,
-                                child: Center(
-                                    child: Row(children: const [
-                                  Text("All Courses",
-                                      style: TextStyle(
-                                          fontFamily: 'QRegular',
-                                          color: primary,
-                                          fontSize: 12))
-                                ])),
-                              ),
-                              DropdownMenuItem(
-                                onTap: () {
-                                  course = "Automotive";
-                                },
-                                value: 1,
-                                child: Center(
-                                    child: Row(children: const [
-                                  Text("Automotive",
-                                      style: TextStyle(
-                                          fontFamily: 'QRegular',
-                                          color: primary,
-                                          fontSize: 12))
-                                ])),
-                              ),
-                              DropdownMenuItem(
-                                onTap: () {
-                                  course = "Food Technology";
-                                },
-                                value: 2,
-                                child: Center(
-                                    child: Row(children: const [
-                                  Text("Food Technology",
-                                      style: TextStyle(
-                                          fontFamily: 'QRegular',
-                                          color: primary,
-                                          fontSize: 12))
-                                ])),
-                              ),
-                              DropdownMenuItem(
-                                onTap: () {
-                                  course = "Electronic Technology";
-                                },
-                                value: 3,
-                                child: Center(
-                                    child: Row(children: const [
-                                  Text("Electronic Technology",
-                                      style: TextStyle(
-                                          fontFamily: 'QRegular',
-                                          color: primary,
-                                          fontSize: 12))
-                                ])),
-                              ),
-                              DropdownMenuItem(
-                                onTap: () {
-                                  course =
-                                      "Entertainment and\nMultimedia Computing";
-                                },
-                                value: 4,
-                                child: Center(
-                                    child: Row(children: const [
-                                  Text(
-                                      "Entertainment and\nMultimedia Computing",
-                                      style: TextStyle(
-                                          fontFamily: 'QRegular',
-                                          color: primary,
-                                          fontSize: 12))
-                                ])),
-                              ),
-                              DropdownMenuItem(
-                                onTap: () {
-                                  course = "Information Technology";
-                                },
-                                value: 5,
-                                child: Center(
-                                    child: Row(children: const [
-                                  Text("Information Technology",
-                                      style: TextStyle(
-                                          fontFamily: 'QRegular',
-                                          color: primary,
-                                          fontSize: 12))
-                                ])),
-                              ),
-                            ],
-                            onChanged: (value) {
-                              setState(() {
-                                _dropdownValue1 = int.parse(value.toString());
-                              });
-                            },
+                      const SizedBox(
+                        width: 30,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Container(
+                          width: 250,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
+                            child: DropdownButton(
+                              underline: Container(color: Colors.transparent),
+                              iconEnabledColor: Colors.black,
+                              isExpanded: true,
+                              value: _dropdownValue1,
+                              items: [
+                                DropdownMenuItem(
+                                  onTap: () {
+                                    course = "All";
+                                  },
+                                  value: 0,
+                                  child: Center(
+                                      child: Row(children: const [
+                                    Text("All Courses",
+                                        style: TextStyle(
+                                            fontFamily: 'QRegular',
+                                            color: primary,
+                                            fontSize: 12))
+                                  ])),
+                                ),
+                                DropdownMenuItem(
+                                  onTap: () {
+                                    course = "Automotive";
+                                  },
+                                  value: 1,
+                                  child: Center(
+                                      child: Row(children: const [
+                                    Text("Automotive",
+                                        style: TextStyle(
+                                            fontFamily: 'QRegular',
+                                            color: primary,
+                                            fontSize: 12))
+                                  ])),
+                                ),
+                                DropdownMenuItem(
+                                  onTap: () {
+                                    course = "Food Technology";
+                                  },
+                                  value: 2,
+                                  child: Center(
+                                      child: Row(children: const [
+                                    Text("Food Technology",
+                                        style: TextStyle(
+                                            fontFamily: 'QRegular',
+                                            color: primary,
+                                            fontSize: 12))
+                                  ])),
+                                ),
+                                DropdownMenuItem(
+                                  onTap: () {
+                                    course = "Electronic Technology";
+                                  },
+                                  value: 3,
+                                  child: Center(
+                                      child: Row(children: const [
+                                    Text("Electronic Technology",
+                                        style: TextStyle(
+                                            fontFamily: 'QRegular',
+                                            color: primary,
+                                            fontSize: 12))
+                                  ])),
+                                ),
+                                DropdownMenuItem(
+                                  onTap: () {
+                                    course =
+                                        "Entertainment and\nMultimedia Computing";
+                                  },
+                                  value: 4,
+                                  child: Center(
+                                      child: Row(children: const [
+                                    Text(
+                                        "Entertainment and\nMultimedia Computing",
+                                        style: TextStyle(
+                                            fontFamily: 'QRegular',
+                                            color: primary,
+                                            fontSize: 12))
+                                  ])),
+                                ),
+                                DropdownMenuItem(
+                                  onTap: () {
+                                    course = "Information Technology";
+                                  },
+                                  value: 5,
+                                  child: Center(
+                                      child: Row(children: const [
+                                    Text("Information Technology",
+                                        style: TextStyle(
+                                            fontFamily: 'QRegular',
+                                            color: primary,
+                                            fontSize: 12))
+                                  ])),
+                                ),
+                              ],
+                              onChanged: (value) {
+                                setState(() {
+                                  _dropdownValue1 = int.parse(value.toString());
+                                });
+                              },
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 50,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            StreamBuilder<QuerySnapshot>(
-                stream: getFilter(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (snapshot.hasError) {
-                    print(snapshot.error);
-                    return const Center(child: Text('Error'));
-                  }
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    print('waiting');
-                    return const Padding(
-                      padding: EdgeInsets.only(top: 50),
-                      child: Center(
-                          child: CircularProgressIndicator(
-                        color: Colors.black,
-                      )),
-                    );
-                  }
+                      const SizedBox(
+                        width: 50,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              StreamBuilder<QuerySnapshot>(
+                  stream: getFilter(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      print(snapshot.error);
+                      return const Center(child: Text('Error'));
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      print('waiting');
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 50),
+                        child: Center(
+                            child: CircularProgressIndicator(
+                          color: Colors.black,
+                        )),
+                      );
+                    }
 
-                  final data = snapshot.requireData;
+                    final data = snapshot.requireData;
 
-                  return Expanded(
-                    child: SizedBox(
-                      child: ListView.builder(
-                          itemCount: 1,
-                          itemBuilder: ((context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(right: 25),
-                              child: Center(
+                    return Expanded(
+                      child: SizedBox(
+                        child: ListView.builder(
+                            itemCount: 1,
+                            itemBuilder: ((context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 25),
                                 child: year == 'Instructor'
                                     ? Container(
                                         height: 500,
@@ -1648,13 +1660,13 @@ class _ReportTabState extends State<UsersPage> {
                                           ),
                                         ),
                                       ),
-                              ),
-                            );
-                          })),
-                    ),
-                  );
-                }),
-          ],
+                              );
+                            })),
+                      ),
+                    );
+                  }),
+            ],
+          ),
         ),
       ),
     );
