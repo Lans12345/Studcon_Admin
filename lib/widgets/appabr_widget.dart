@@ -24,7 +24,7 @@ PreferredSizeWidget appbarWidget(PageController page) {
       const CircleAvatar(
         minRadius: 20,
         maxRadius: 20,
-        backgroundImage: NetworkImage('assets/images/dean.png'),
+        backgroundImage: NetworkImage('assets/images/dean.jpg'),
       ),
       const SizedBox(
         width: 10,

@@ -334,6 +334,10 @@ class _ReportTabState extends State<UsersPage> {
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
+                                                      NormalText(
+                                                          label: 'First Name',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       TextformfieldWidget(
                                                         label: 'First name',
                                                         textFieldController:
@@ -342,6 +346,10 @@ class _ReportTabState extends State<UsersPage> {
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
+                                                      NormalText(
+                                                          label: 'Middle Name',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       TextformfieldWidget(
                                                         label: 'Middle Name',
                                                         textFieldController:
@@ -350,6 +358,10 @@ class _ReportTabState extends State<UsersPage> {
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
+                                                      NormalText(
+                                                          label: 'Surname',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       TextformfieldWidget(
                                                         label: 'Surname',
                                                         textFieldController:
@@ -358,6 +370,11 @@ class _ReportTabState extends State<UsersPage> {
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
+                                                      NormalText(
+                                                          label:
+                                                              'Contact Number',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       TextformfieldWidget(
                                                         label: 'Contact Number',
                                                         textFieldController:
@@ -366,6 +383,10 @@ class _ReportTabState extends State<UsersPage> {
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
+                                                      NormalText(
+                                                          label: 'Address',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       TextformfieldWidget(
                                                         label: 'Address',
                                                         textFieldController:
@@ -374,6 +395,10 @@ class _ReportTabState extends State<UsersPage> {
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
+                                                      NormalText(
+                                                          label: 'Course',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       TextformfieldWidget(
                                                         label: 'Course',
                                                         textFieldController:
@@ -382,6 +407,10 @@ class _ReportTabState extends State<UsersPage> {
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
+                                                      NormalText(
+                                                          label: 'Year Level',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       TextformfieldWidget(
                                                         label: 'Year Level',
                                                         textFieldController:
@@ -390,6 +419,10 @@ class _ReportTabState extends State<UsersPage> {
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
+                                                      NormalText(
+                                                          label: 'Email',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       TextformfieldWidget(
                                                           isForStudentReg: true,
                                                           prefixIcon:
@@ -401,6 +434,10 @@ class _ReportTabState extends State<UsersPage> {
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
+                                                      NormalText(
+                                                          label: 'Password',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       TextformfieldWidget(
                                                           prefixIcon:
                                                               const Icon(
@@ -612,11 +649,19 @@ class _ReportTabState extends State<UsersPage> {
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
+                                                      NormalText(
+                                                          label: 'First Name',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       TextformfieldWidget(
                                                         label: 'First name',
                                                         textFieldController:
                                                             _firstNameController,
                                                       ),
+                                                      NormalText(
+                                                          label: 'Middle Name',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
@@ -628,6 +673,10 @@ class _ReportTabState extends State<UsersPage> {
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
+                                                      NormalText(
+                                                          label: 'Surname',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       TextformfieldWidget(
                                                         label: 'Surname',
                                                         textFieldController:
@@ -636,6 +685,11 @@ class _ReportTabState extends State<UsersPage> {
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
+                                                      NormalText(
+                                                          label:
+                                                              'Contact Number',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       TextformfieldWidget(
                                                         label: 'Contact Number',
                                                         textFieldController:
@@ -644,6 +698,10 @@ class _ReportTabState extends State<UsersPage> {
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
+                                                      NormalText(
+                                                          label: 'Department',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       TextformfieldWidget(
                                                         label: 'Department',
                                                         textFieldController:
@@ -652,6 +710,10 @@ class _ReportTabState extends State<UsersPage> {
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
+                                                      NormalText(
+                                                          label: 'Email',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       TextformfieldWidget(
                                                           isForStudentReg:
                                                               false,
@@ -664,6 +726,10 @@ class _ReportTabState extends State<UsersPage> {
                                                       const SizedBox(
                                                         height: 20,
                                                       ),
+                                                      NormalText(
+                                                          label: 'Password',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
                                                       TextformfieldWidget(
                                                           prefixIcon:
                                                               const Icon(
