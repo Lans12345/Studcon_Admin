@@ -105,7 +105,7 @@ class _ReportTabState extends State<ReportTab> {
               pw.SizedBox(
                 height: 20,
               ),
-              for (int i = 0; i < name.length; i++)
+              for (int i = 1; i < name.length; i++)
                 pw.Table(
                     border: pw.TableBorder.all(color: PdfColors.black),
                     children: [
