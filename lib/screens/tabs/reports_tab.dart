@@ -538,7 +538,7 @@ class _ReportTabState extends State<ReportTab> {
                                         // column to set the name
                                         DataColumn(
                                             label: BoldText(
-                                                label: 'No.',
+                                                label: 'ID',
                                                 fontSize: 12,
                                                 color: Colors.white)),
                                         DataColumn(
@@ -581,7 +581,7 @@ class _ReportTabState extends State<ReportTab> {
 
                                       rows: [
                                         // row to set the values
-                                        for (int i = 0;
+                                        for (int i = 1;
                                             i < snapshot.data!.size;
                                             i++)
                                           DataRow(

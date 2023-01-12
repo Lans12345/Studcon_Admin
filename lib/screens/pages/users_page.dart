@@ -1106,7 +1106,7 @@ class _ReportTabState extends State<UsersPage> {
                                               // column to set the name
                                               DataColumn(
                                                   label: BoldText(
-                                                      label: 'No.',
+                                                      label: 'ID',
                                                       fontSize: 14,
                                                       color: Colors.white)),
                                               DataColumn(
@@ -1317,7 +1317,7 @@ class _ReportTabState extends State<UsersPage> {
                                               // column to set the name
                                               DataColumn(
                                                   label: BoldText(
-                                                      label: 'No.',
+                                                      label: 'ID',
                                                       fontSize: 14,
                                                       color: Colors.white)),
                                               DataColumn(
